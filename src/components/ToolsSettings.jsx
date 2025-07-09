@@ -271,8 +271,8 @@ function ToolsSettings({ isOpen, onClose }) {
 
               <div className="space-y-2">
                 {allowedTools.map(tool => (
-                  <div key={tool} className="flex items-center justify-between bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3">
-                    <span className="font-mono text-sm text-green-800 dark:text-green-200">
+                  <div key={tool} className="flex items-center justify-between bg-brand-green/10 dark:bg-brand-green/20 border border-brand-green/30 dark:border-brand-green/40 rounded-lg p-3">
+                    <span className="font-mono text-sm text-brand-green dark:text-brand-green">
                       {tool}
                     </span>
                     <Button

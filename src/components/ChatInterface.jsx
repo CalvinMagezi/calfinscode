@@ -67,16 +67,16 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
       {message.type === 'user' ? (
         /* User message bubble on the right */
         <div className="flex items-end space-x-0 sm:space-x-3 w-full sm:w-auto sm:max-w-[85%] md:max-w-md lg:max-w-lg xl:max-w-xl">
-          <div className="bg-blue-600 text-white rounded-2xl rounded-br-md px-3 sm:px-4 py-2 shadow-sm flex-1 sm:flex-initial">
+          <div className="bg-brand-blue text-white rounded-2xl rounded-br-md px-3 sm:px-4 py-2 shadow-sm flex-1 sm:flex-initial">
             <div className="text-sm whitespace-pre-wrap break-words">
               {message.content}
             </div>
-            <div className="text-xs text-blue-100 mt-1 text-right">
+            <div className="text-xs text-brand-gray mt-1 text-right">
               {new Date(message.timestamp).toLocaleTimeString()}
             </div>
           </div>
           {!isGrouped && (
-            <div className="hidden sm:flex w-8 h-8 bg-blue-600 rounded-full items-center justify-center text-white text-sm flex-shrink-0">
+            <div className="hidden sm:flex w-8 h-8 bg-brand-blue rounded-full items-center justify-center text-white text-sm flex-shrink-0">
               U
             </div>
           )}
@@ -95,7 +95,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                   <ClaudeLogo className="w-full h-full" />
                 </div>
               )}
-              <div className="text-sm font-medium text-gray-900 dark:text-white">
+              <div className="text-sm font-medium text-brand-gray-text dark:text-white">
                 {message.type === 'error' ? 'Error' : 'Claude'}
               </div>
             </div>
@@ -104,19 +104,19 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
           <div className="w-full">
             
             {message.isToolUse ? (
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-2 sm:p-3 mb-2">
+              <div className="bg-brand-blue/10 dark:bg-brand-blue/20 border border-brand-blue/30 dark:border-brand-blue/40 rounded-lg p-2 sm:p-3 mb-2">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 bg-blue-600 rounded flex items-center justify-center">
+                    <div className="w-5 h-5 bg-brand-blue rounded flex items-center justify-center">
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                     </div>
-                    <span className="font-medium text-blue-900 dark:text-blue-100">
+                    <span className="font-medium text-brand-blue dark:text-brand-gray">
                       Using {message.toolName}
                     </span>
-                    <span className="text-xs text-blue-600 dark:text-blue-400 font-mono">
+                    <span className="text-xs text-brand-blue dark:text-brand-blue font-mono">
                       {message.toolId}
                     </span>
                   </div>
@@ -126,10 +126,10 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                         e.stopPropagation();
                         onShowSettings();
                       }}
-                      className="p-1 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                      className="p-1 rounded hover:bg-brand-blue/20 dark:hover:bg-brand-blue/30 transition-colors"
                       title="Tool Settings"
                     >
-                      <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-brand-blue dark:text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
@@ -142,7 +142,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                     if (input.file_path && input.old_string && input.new_string) {
                       return (
                         <details className="mt-2" open={autoExpandTools}>
-                          <summary className="text-sm text-blue-700 dark:text-blue-300 cursor-pointer hover:text-blue-800 dark:hover:text-blue-200 flex items-center gap-2">
+                          <summary className="text-sm text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80 flex items-center gap-2">
                             <svg className="w-4 h-4 transition-transform details-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
@@ -156,24 +156,24 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                   new_string: input.new_string
                                 });
                               }}
-                              className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline font-mono"
+                              className="text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/80 underline font-mono"
                             >
                               {input.file_path.split('/').pop()}
                             </button>
                           </summary>
                           <div className="mt-3">
-                            <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                              <div className="flex items-center justify-between px-3 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                            <div className="bg-brand-primary-bg dark:bg-brand-app-black border border-brand-gray/30 dark:border-brand-gray/20 rounded-lg overflow-hidden">
+                              <div className="flex items-center justify-between px-3 py-2 bg-brand-primary-bg dark:bg-brand-app-black border-b border-brand-gray/30 dark:border-brand-gray/20">
                                 <button 
                                   onClick={() => onFileOpen && onFileOpen(input.file_path, {
                                     old_string: input.old_string,
                                     new_string: input.new_string
                                   })}
-                                  className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 truncate underline cursor-pointer"
+                                  className="text-xs font-mono text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/80 truncate underline cursor-pointer"
                                 >
                                   {input.file_path}
                                 </button>
-                                <span className="text-xs text-gray-500 dark:text-gray-400">
+                                <span className="text-xs text-brand-gray-text dark:text-brand-gray-text">
                                   Diff
                                 </span>
                               </div>
@@ -200,10 +200,10 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                             </div>
                             {showRawParameters && (
                               <details className="mt-2" open={autoExpandTools}>
-                                <summary className="text-xs text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-700 dark:hover:text-blue-300">
+                                <summary className="text-xs text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80">
                                   View raw parameters
                                 </summary>
-                                <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-blue-900 dark:text-blue-100">
+                                <pre className="mt-2 text-xs bg-brand-blue/10 dark:bg-brand-blue/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-brand-blue dark:text-brand-gray">
                                   {message.toolInput}
                                 </pre>
                               </details>
@@ -217,10 +217,10 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                   }
                   return (
                     <details className="mt-2" open={autoExpandTools}>
-                      <summary className="text-sm text-blue-700 dark:text-blue-300 cursor-pointer hover:text-blue-800 dark:hover:text-blue-200">
+                      <summary className="text-sm text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80">
                         View input parameters
                       </summary>
-                      <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-blue-900 dark:text-blue-100">
+                      <pre className="mt-2 text-xs bg-brand-blue/10 dark:bg-brand-blue/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-brand-blue dark:text-brand-gray">
                         {message.toolInput}
                       </pre>
                     </details>
@@ -247,7 +247,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                       if (input.file_path && input.content !== undefined) {
                         return (
                           <details className="mt-2" open={autoExpandTools}>
-                            <summary className="text-sm text-blue-700 dark:text-blue-300 cursor-pointer hover:text-blue-800 dark:hover:text-blue-200 flex items-center gap-2">
+                            <summary className="text-sm text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80 flex items-center gap-2">
                               <svg className="w-4 h-4 transition-transform details-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                               </svg>
@@ -261,24 +261,24 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                     new_string: input.content
                                   });
                                 }}
-                                className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline font-mono"
+                                className="text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/80 underline font-mono"
                               >
                                 {input.file_path.split('/').pop()}
                               </button>
                             </summary>
                             <div className="mt-3">
-                              <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                                <div className="flex items-center justify-between px-3 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                              <div className="bg-brand-primary-bg dark:bg-brand-app-black border border-brand-gray/30 dark:border-brand-gray/20 rounded-lg overflow-hidden">
+                                <div className="flex items-center justify-between px-3 py-2 bg-brand-primary-bg dark:bg-brand-app-black border-b border-brand-gray/30 dark:border-brand-gray/20">
                                   <button 
                                     onClick={() => onFileOpen && onFileOpen(input.file_path, {
                                       old_string: '',
                                       new_string: input.content
                                     })}
-                                    className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 truncate underline cursor-pointer"
+                                    className="text-xs font-mono text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/80 truncate underline cursor-pointer"
                                   >
                                     {input.file_path}
                                   </button>
-                                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                                  <span className="text-xs text-brand-gray-text dark:text-brand-gray-text">
                                     New File
                                   </span>
                                 </div>
@@ -305,10 +305,10 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                               </div>
                               {showRawParameters && (
                                 <details className="mt-2" open={autoExpandTools}>
-                                  <summary className="text-xs text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-700 dark:hover:text-blue-300">
+                                  <summary className="text-xs text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80">
                                     View raw parameters
                                   </summary>
-                                  <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-blue-900 dark:text-blue-100">
+                                  <pre className="mt-2 text-xs bg-brand-blue/10 dark:bg-brand-blue/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-brand-blue dark:text-brand-gray">
                                     {message.toolInput}
                                   </pre>
                                 </details>
@@ -329,7 +329,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                       if (input.todos && Array.isArray(input.todos)) {
                         return (
                           <details className="mt-2" open={autoExpandTools}>
-                            <summary className="text-sm text-blue-700 dark:text-blue-300 cursor-pointer hover:text-blue-800 dark:hover:text-blue-200 flex items-center gap-2">
+                            <summary className="text-sm text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80 flex items-center gap-2">
                               <svg className="w-4 h-4 transition-transform details-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                               </svg>
@@ -339,7 +339,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                               <TodoList todos={input.todos} />
                               {showRawParameters && (
                                 <details className="mt-3" open={autoExpandTools}>
-                                  <summary className="text-xs text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-700 dark:hover:text-blue-300">
+                                  <summary className="text-xs text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80">
                                     View raw parameters
                                   </summary>
                                   <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded overflow-x-auto text-blue-900 dark:text-blue-100">
@@ -362,15 +362,15 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                       const input = JSON.parse(message.toolInput);
                       return (
                         <details className="mt-2" open={autoExpandTools}>
-                          <summary className="text-sm text-blue-700 dark:text-blue-300 cursor-pointer hover:text-blue-800 dark:hover:text-blue-200 flex items-center gap-2">
+                          <summary className="text-sm text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80 flex items-center gap-2">
                             <svg className="w-4 h-4 transition-transform details-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                             Running command
                           </summary>
                           <div className="mt-3 space-y-2">
-                            <div className="bg-gray-900 dark:bg-gray-950 text-gray-100 rounded-lg p-3 font-mono text-sm">
-                              <div className="flex items-center gap-2 mb-2 text-gray-400">
+                            <div className="bg-brand-app-black dark:bg-brand-primary-black text-brand-gray rounded-lg p-3 font-mono text-sm">
+                              <div className="flex items-center gap-2 mb-2 text-brand-gray-text">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -381,16 +381,16 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                               </div>
                             </div>
                             {input.description && (
-                              <div className="text-xs text-gray-600 dark:text-gray-400 italic">
+                              <div className="text-xs text-brand-gray-text dark:text-brand-gray-text italic">
                                 {input.description}
                               </div>
                             )}
                             {showRawParameters && (
                               <details className="mt-2">
-                                <summary className="text-xs text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-700 dark:hover:text-blue-300">
+                                <summary className="text-xs text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80">
                                   View raw parameters
                                 </summary>
-                                <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-blue-900 dark:text-blue-100">
+                                <pre className="mt-2 text-xs bg-brand-blue/10 dark:bg-brand-blue/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-brand-blue dark:text-brand-gray">
                                   {message.toolInput}
                                 </pre>
                               </details>
@@ -424,19 +424,19 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                               <svg className="w-4 h-4 transition-transform details-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                               </svg>
-                              <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-4 h-4 text-brand-blue dark:text-brand-blue ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                               </svg>
-                              <span className="text-gray-600 dark:text-gray-400 font-mono text-xs">{relativePath}</span>
-                              <span className="font-semibold text-blue-700 dark:text-blue-300 font-mono">{filename}</span>
+                              <span className="text-brand-gray-text dark:text-brand-gray-text font-mono text-xs">{relativePath}</span>
+                              <span className="font-semibold text-brand-blue dark:text-brand-blue font-mono">{filename}</span>
                             </summary>
                             {showRawParameters && (
                               <div className="mt-3">
                                 <details className="mt-2">
-                                  <summary className="text-xs text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-700 dark:hover:text-blue-300">
+                                  <summary className="text-xs text-brand-blue dark:text-brand-blue cursor-pointer hover:text-brand-blue/80 dark:hover:text-brand-blue/80">
                                     View raw parameters
                                   </summary>
-                                  <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-blue-900 dark:text-blue-100">
+                                  <pre className="mt-2 text-xs bg-brand-blue/10 dark:bg-brand-blue/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-brand-blue dark:text-brand-gray">
                                     {message.toolInput}
                                   </pre>
                                 </details>
@@ -459,7 +459,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                         </svg>
                         View input parameters
                       </summary>
-                      <pre className="mt-2 text-xs bg-blue-100 dark:bg-blue-800/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-blue-900 dark:text-blue-100">
+                      <pre className="mt-2 text-xs bg-brand-blue/10 dark:bg-brand-blue/30 p-2 rounded whitespace-pre-wrap break-words overflow-hidden text-brand-blue dark:text-brand-gray">
                         {message.toolInput}
                       </pre>
                     </details>
@@ -468,14 +468,14 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                 
                 {/* Tool Result Section */}
                 {message.toolResult && (
-                  <div className="mt-3 border-t border-blue-200 dark:border-blue-700 pt-3">
+                  <div className="mt-3 border-t border-brand-blue/30 dark:border-brand-blue/40 pt-3">
                     <div className="flex items-center gap-2 mb-2">
                       <div className={`w-4 h-4 rounded flex items-center justify-center ${
                         message.toolResult.isError 
                           ? 'bg-red-500' 
-                          : 'bg-green-500'
+                          : 'bg-brand-green'
                       }`}>
-                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-3 h-3 ${message.toolResult.isError ? 'text-white' : 'text-brand-app-black'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {message.toolResult.isError ? (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                           ) : (
@@ -565,7 +565,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                           return (
                             <div className="space-y-3">
                               {beforePrompt && (
-                                <div className="bg-gray-900 dark:bg-gray-950 text-gray-100 rounded-lg p-3 font-mono text-xs overflow-x-auto">
+                                <div className="bg-brand-app-black dark:bg-brand-primary-black text-brand-gray rounded-lg p-3 font-mono text-xs overflow-x-auto">
                                   <pre className="whitespace-pre-wrap break-words">{beforePrompt}</pre>
                                 </div>
                               )}
@@ -592,7 +592,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                           className={`w-full text-left px-4 py-3 rounded-lg border-2 transition-all ${
                                             selectedOption === option.number
                                               ? 'bg-amber-600 dark:bg-amber-700 text-white border-amber-600 dark:border-amber-700 shadow-md'
-                                              : 'bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700 hover:border-amber-400 dark:hover:border-amber-600 hover:shadow-sm'
+                                              : 'bg-white dark:bg-brand-app-black text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700 hover:border-amber-400 dark:hover:border-amber-600 hover:shadow-sm'
                                           } ${
                                             selectedOption ? 'cursor-default' : 'cursor-not-allowed opacity-75'
                                           }`}
@@ -645,7 +645,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                               </div>
                               <button 
                                 onClick={() => onFileOpen && onFileOpen(fileEditMatch[1])}
-                                className="text-xs font-mono bg-green-100 dark:bg-green-800/30 px-2 py-1 rounded text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline cursor-pointer"
+                                className="text-xs font-mono bg-brand-green/10 dark:bg-brand-green/30 px-2 py-1 rounded text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/80 underline cursor-pointer"
                               >
                                 {fileEditMatch[1]}
                               </button>
@@ -663,7 +663,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                               </div>
                               <button 
                                 onClick={() => onFileOpen && onFileOpen(fileCreateMatch[1])}
-                                className="text-xs font-mono bg-green-100 dark:bg-green-800/30 px-2 py-1 rounded text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline cursor-pointer"
+                                className="text-xs font-mono bg-brand-green/10 dark:bg-brand-green/30 px-2 py-1 rounded text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/80 underline cursor-pointer"
                               >
                                 {fileCreateMatch[1]}
                               </button>
@@ -699,7 +699,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                 </svg>
                                 View file content
                               </summary>
-                              <div className="mt-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                              <div className="mt-2 bg-brand-primary-bg dark:bg-brand-app-black border border-brand-gray/30 dark:border-brand-gray/20 rounded-lg overflow-hidden">
                                 <div className="text-xs font-mono p-3 whitespace-pre-wrap break-words overflow-hidden">
                                   {content}
                                 </div>
@@ -780,7 +780,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                 className={`w-full text-left px-4 py-3 rounded-lg border-2 transition-all ${
                                   option.isSelected
                                     ? 'bg-amber-600 dark:bg-amber-700 text-white border-amber-600 dark:border-amber-700 shadow-md'
-                                    : 'bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700'
+                                    : 'bg-white dark:bg-brand-app-black text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700'
                                 } cursor-not-allowed opacity-75`}
                                 disabled
                               >
@@ -818,31 +818,31 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                 </div>
               </div>
             ) : (
-              <div className="text-sm text-gray-700 dark:text-gray-300">
+              <div className="text-sm text-brand-gray-text dark:text-brand-gray">
                 {message.type === 'assistant' ? (
                   <div className="prose prose-sm max-w-none dark:prose-invert prose-gray [&_code]:!bg-transparent [&_code]:!p-0">
                     <ReactMarkdown
                       components={{
                         code: ({node, inline, className, children, ...props}) => {
                           return inline ? (
-                            <strong className="text-blue-600 dark:text-blue-400 font-bold not-prose" {...props}>
+                            <strong className="text-brand-blue dark:text-brand-blue font-bold not-prose" {...props}>
                               {children}
                             </strong>
                           ) : (
-                            <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg overflow-hidden my-2">
-                              <code className="text-gray-800 dark:text-gray-200 text-sm font-mono block whitespace-pre-wrap break-words" {...props}>
+                            <div className="bg-brand-primary-bg dark:bg-brand-app-black p-3 rounded-lg overflow-hidden my-2">
+                              <code className="text-brand-gray-text dark:text-brand-gray text-sm font-mono block whitespace-pre-wrap break-words" {...props}>
                                 {children}
                               </code>
                             </div>
                           );
                         },
                         blockquote: ({children}) => (
-                          <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic text-gray-600 dark:text-gray-400 my-2">
+                          <blockquote className="border-l-4 border-brand-gray/30 dark:border-brand-gray/40 pl-4 italic text-brand-gray-text dark:text-brand-gray-text my-2">
                             {children}
                           </blockquote>
                         ),
                         a: ({href, children}) => (
-                          <a href={href} className="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                          <a href={href} className="text-brand-blue dark:text-brand-blue hover:underline" target="_blank" rel="noopener noreferrer">
                             {children}
                           </a>
                         ),
@@ -864,7 +864,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
               </div>
             )}
             
-            <div className={`text-xs text-gray-500 dark:text-gray-400 mt-1 ${isGrouped ? 'opacity-0 group-hover:opacity-100' : ''}`}>
+            <div className={`text-xs text-brand-gray-text dark:text-brand-gray-text mt-1 ${isGrouped ? 'opacity-0 group-hover:opacity-100' : ''}`}>
               {new Date(message.timestamp).toLocaleTimeString()}
             </div>
           </div>
@@ -1793,7 +1793,7 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
   if (!selectedProject) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-center text-gray-500 dark:text-gray-400">
+        <div className="text-center text-brand-gray-text dark:text-brand-gray-text">
           <p>Select a project to start chatting with Claude</p>
         </div>
       </div>
@@ -1816,15 +1816,15 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
         className="flex-1 overflow-y-auto overflow-x-hidden px-0 py-3 sm:p-4 space-y-3 sm:space-y-4 relative"
       >
         {isLoadingSessionMessages && chatMessages.length === 0 ? (
-          <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
+          <div className="text-center text-brand-gray-text dark:text-brand-gray-text mt-8">
             <div className="flex items-center justify-center space-x-2">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-brand-gray"></div>
               <p>Loading session messages...</p>
             </div>
           </div>
         ) : chatMessages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-center text-gray-500 dark:text-gray-400 px-6 sm:px-4">
+            <div className="text-center text-brand-gray-text dark:text-brand-gray-text px-6 sm:px-4">
               <p className="font-bold text-lg sm:text-xl mb-3">Start a conversation with Claude</p>
               <p className="text-sm sm:text-base leading-relaxed">
                 Ask questions about your code, request changes, or get help with development tasks
@@ -1834,9 +1834,9 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
         ) : (
           <>
             {chatMessages.length > 100 && (
-              <div className="text-center text-gray-500 dark:text-gray-400 text-sm py-2 border-b border-gray-200 dark:border-gray-700">
+              <div className="text-center text-brand-gray-text dark:text-brand-gray-text text-sm py-2 border-b border-brand-gray/30 dark:border-brand-gray/20">
                 Showing last 100 messages ({chatMessages.length} total) • 
-                <button className="ml-1 text-blue-600 hover:text-blue-700 underline">
+                <button className="ml-1 text-brand-blue hover:text-brand-blue/80 underline">
                   Load earlier messages
                 </button>
               </div>
@@ -1866,13 +1866,13 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
           <div className="chat-message assistant">
             <div className="w-full">
               <div className="flex items-center space-x-3 mb-2">
-                <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm flex-shrink-0">
+                <div className="w-8 h-8 bg-brand-gray-text rounded-full flex items-center justify-center text-white text-sm flex-shrink-0">
                   C
                 </div>
-                <div className="text-sm font-medium text-gray-900 dark:text-white">Claude</div>
+                <div className="text-sm font-medium text-brand-gray-text dark:text-white">Claude</div>
                 {/* Abort button removed - functionality not yet implemented at backend */}
               </div>
-              <div className="w-full text-sm text-gray-500 dark:text-gray-400 pl-3 sm:pl-0">
+              <div className="w-full text-sm text-brand-gray-text dark:text-brand-gray-text pl-3 sm:pl-0">
                 <div className="flex items-center space-x-1">
                   <div className="animate-pulse">●</div>
                   <div className="animate-pulse" style={{ animationDelay: '0.2s' }}>●</div>
@@ -1891,7 +1891,7 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
       {isUserScrolledUp && chatMessages.length > 0 && (
         <button
           onClick={scrollToBottom}
-          className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-gray-800 z-50"
+          className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-12 h-12 bg-brand-blue hover:bg-brand-blue/80 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 dark:ring-offset-brand-app-black z-50"
           title="Scroll to bottom"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1912,7 +1912,7 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
         />
         
         <form onSubmit={handleSubmit} className="relative max-w-4xl mx-auto">
-          <div className={`relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-600 focus-within:ring-2 focus-within:ring-blue-500 dark:focus-within:ring-blue-500 focus-within:border-blue-500 transition-all duration-200 ${isTextareaExpanded ? 'chat-input-expanded' : ''}`}>
+          <div className={`relative bg-white dark:bg-brand-app-black rounded-2xl shadow-lg border border-brand-gray/30 dark:border-brand-gray/40 focus-within:ring-2 focus-within:ring-brand-blue dark:focus-within:ring-brand-blue focus-within:border-brand-blue transition-all duration-200 ${isTextareaExpanded ? 'chat-input-expanded' : ''}`}>
             <textarea
               ref={textareaRef}
               value={input}
@@ -1935,7 +1935,7 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
               placeholder="Ask Claude to help with your code... (@ to reference files)"
               disabled={isLoading}
               rows={1}
-              className="chat-input-placeholder w-full px-4 sm:px-6 py-3 sm:py-4 pr-28 sm:pr-40 bg-transparent rounded-2xl focus:outline-none text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 disabled:opacity-50 resize-none min-h-[40px] sm:min-h-[56px] max-h-[40vh] sm:max-h-[300px] overflow-y-auto text-sm sm:text-base transition-all duration-200"
+              className="chat-input-placeholder w-full px-4 sm:px-6 py-3 sm:py-4 pr-28 sm:pr-40 bg-transparent rounded-2xl focus:outline-none text-brand-gray-text dark:text-brand-gray placeholder-gray-400 dark:placeholder-gray-500 disabled:opacity-50 resize-none min-h-[40px] sm:min-h-[56px] max-h-[40vh] sm:max-h-[300px] overflow-y-auto text-sm sm:text-base transition-all duration-200"
               style={{ height: 'auto' }}
             />
             {/* Clear button - shown when there's text */}
@@ -1962,11 +1962,11 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
                   }
                   setIsTextareaExpanded(false);
                 }}
-                className="absolute -left-0.5 -top-3 sm:right-28 sm:left-auto sm:top-1/2 sm:-translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center transition-all duration-200 group z-10 shadow-sm"
+                className="absolute -left-0.5 -top-3 sm:right-28 sm:left-auto sm:top-1/2 sm:-translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-brand-primary-bg hover:bg-brand-gray/20 dark:bg-brand-app-black dark:hover:bg-brand-gray/20 border border-brand-gray/30 dark:border-brand-gray/40 rounded-full flex items-center justify-center transition-all duration-200 group z-10 shadow-sm"
                 title="Clear input"
               >
                 <svg 
-                  className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors" 
+                  className="w-3 h-3 sm:w-4 sm:h-4 text-brand-gray-text dark:text-brand-gray group-hover:text-brand-gray-text dark:group-hover:text-brand-gray transition-colors" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
@@ -1999,7 +1999,7 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
                 e.preventDefault();
                 handleSubmit(e);
               }}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-12 h-12 sm:w-12 sm:h-12 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-gray-800"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-12 h-12 sm:w-12 sm:h-12 bg-brand-blue hover:bg-brand-blue/80 disabled:bg-brand-gray-text disabled:cursor-not-allowed rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 dark:ring-offset-brand-app-black"
             >
               <svg 
                 className="w-4 h-4 sm:w-5 sm:h-5 text-white transform rotate-90" 
@@ -2018,14 +2018,14 @@ function ChatInterface({ selectedProject, selectedSession, ws, sendMessage, mess
             
             {/* File dropdown */}
             {showFileDropdown && filteredFiles.length > 0 && (
-              <div className="absolute bottom-full left-0 right-0 mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg max-h-48 overflow-y-auto z-50">
+              <div className="absolute bottom-full left-0 right-0 mb-2 bg-white dark:bg-brand-app-black border border-brand-gray/30 dark:border-brand-gray/40 rounded-lg shadow-lg max-h-48 overflow-y-auto z-50">
                 {filteredFiles.map((file, index) => (
                   <div
                     key={file.path}
-                    className={`px-4 py-2 cursor-pointer border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
+                    className={`px-4 py-2 cursor-pointer border-b border-brand-gray/20 dark:border-brand-gray/20 last:border-b-0 ${
                       index === selectedFileIndex
-                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
+                        ? 'bg-brand-blue/10 dark:bg-brand-blue/20 text-brand-blue dark:text-brand-blue'
+                        : 'hover:bg-brand-primary-bg dark:hover:bg-brand-app-black text-brand-gray-text dark:text-brand-gray'
                     }`}
                     onClick={() => selectFile(file)}
                   >

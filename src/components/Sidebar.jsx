@@ -587,16 +587,16 @@ function Sidebar({
                             {editingProject === project.name ? (
                               <>
                                 <button
-                                  className="w-8 h-8 rounded-lg bg-green-500 dark:bg-green-600 flex items-center justify-center active:scale-90 transition-all duration-150 shadow-sm active:shadow-none"
+                                  className="w-8 h-8 rounded-lg bg-brand-green dark:bg-brand-green flex items-center justify-center active:scale-90 transition-all duration-150 shadow-sm active:shadow-none"
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     saveProjectName(project.name);
                                   }}
                                 >
-                                  <Check className="w-4 h-4 text-white" />
+                                  <Check className="w-4 h-4 text-brand-app-black" />
                                 </button>
                                 <button
-                                  className="w-8 h-8 rounded-lg bg-gray-500 dark:bg-gray-600 flex items-center justify-center active:scale-90 transition-all duration-150 shadow-sm active:shadow-none"
+                                  className="w-8 h-8 rounded-lg bg-brand-gray-text dark:bg-brand-gray-text flex items-center justify-center active:scale-90 transition-all duration-150 shadow-sm active:shadow-none"
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     cancelEditing();
@@ -715,7 +715,7 @@ function Sidebar({
                         {editingProject === project.name ? (
                           <>
                             <div
-                              className="w-6 h-6 text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20 flex items-center justify-center rounded cursor-pointer transition-colors"
+                              className="w-6 h-6 text-brand-green hover:text-brand-green/80 hover:bg-brand-green/10 dark:hover:bg-brand-green/20 flex items-center justify-center rounded cursor-pointer transition-colors"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 saveProjectName(project.name);
@@ -724,7 +724,7 @@ function Sidebar({
                               <Check className="w-3 h-3" />
                             </div>
                             <div
-                              className="w-6 h-6 text-gray-500 hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center justify-center rounded cursor-pointer transition-colors"
+                              className="w-6 h-6 text-brand-gray-text hover:text-brand-gray-text hover:bg-brand-primary-bg dark:hover:bg-brand-app-black flex items-center justify-center rounded cursor-pointer transition-colors"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 cancelEditing();
@@ -800,7 +800,7 @@ function Sidebar({
                             {/* Active session indicator dot */}
                             {isActive && (
                               <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1">
-                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                                <div className="w-2 h-2 bg-brand-green rounded-full animate-pulse" />
                               </div>
                             )}
                             {/* Mobile Session Item */}
@@ -809,7 +809,7 @@ function Sidebar({
                                 className={cn(
                                   "p-2 mx-3 my-0.5 rounded-md bg-card border active:scale-[0.98] transition-all duration-150 relative",
                                   selectedSession?.id === session.id ? "bg-primary/5 border-primary/20" :
-                                  isActive ? "border-green-500/30 bg-green-50/5 dark:bg-green-900/5" : "border-border/30"
+                                  isActive ? "border-brand-green/30 bg-brand-green/5 dark:bg-brand-green/5" : "border-border/30"
                                 )}
                                 onClick={() => {
                                   onProjectSelect(project);
@@ -914,7 +914,7 @@ function Sidebar({
                                       autoFocus
                                     />
                                     <button
-                                      className="w-6 h-6 bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/40 rounded flex items-center justify-center"
+                                      className="w-6 h-6 bg-brand-green/10 hover:bg-brand-green/20 dark:bg-brand-green/20 dark:hover:bg-brand-green/40 rounded flex items-center justify-center"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         updateSessionSummary(project.name, session.id, editingSessionName);
@@ -924,7 +924,7 @@ function Sidebar({
                                       <Check className="w-3 h-3 text-green-600 dark:text-green-400" />
                                     </button>
                                     <button
-                                      className="w-6 h-6 bg-gray-50 hover:bg-gray-100 dark:bg-gray-900/20 dark:hover:bg-gray-900/40 rounded flex items-center justify-center"
+                                      className="w-6 h-6 bg-brand-primary-bg hover:bg-brand-primary-bg dark:bg-brand-app-black/20 dark:hover:bg-brand-app-black/40 rounded flex items-center justify-center"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         setEditingSession(null);
@@ -932,14 +932,14 @@ function Sidebar({
                                       }}
                                       title="Cancel"
                                     >
-                                      <X className="w-3 h-3 text-gray-600 dark:text-gray-400" />
+                                      <X className="w-3 h-3 text-brand-gray-text dark:text-brand-gray-text" />
                                     </button>
                                   </>
                                 ) : (
                                   <>
                                     {/* Generate summary button */}
                                     {/* <button
-                                      className="w-6 h-6 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 rounded flex items-center justify-center"
+                                      className="w-6 h-6 bg-brand-blue/10 hover:bg-brand-blue/20 dark:bg-brand-blue/20 dark:hover:bg-brand-blue/40 rounded flex items-center justify-center"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         generateSessionSummary(project.name, session.id);
@@ -948,14 +948,14 @@ function Sidebar({
                                       disabled={generatingSummary[`${project.name}-${session.id}`]}
                                     >
                                       {generatingSummary[`${project.name}-${session.id}`] ? (
-                                        <div className="w-3 h-3 animate-spin rounded-full border border-blue-600 dark:border-blue-400 border-t-transparent" />
+                                        <div className="w-3 h-3 animate-spin rounded-full border border-brand-blue dark:border-brand-blue border-t-transparent" />
                                       ) : (
-                                        <Sparkles className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+                                        <Sparkles className="w-3 h-3 text-brand-blue dark:text-brand-blue" />
                                       )}
                                     </button> */}
                                     {/* Edit button */}
                                     <button
-                                      className="w-6 h-6 bg-gray-50 hover:bg-gray-100 dark:bg-gray-900/20 dark:hover:bg-gray-900/40 rounded flex items-center justify-center"
+                                      className="w-6 h-6 bg-brand-primary-bg hover:bg-brand-primary-bg dark:bg-brand-app-black/20 dark:hover:bg-brand-app-black/40 rounded flex items-center justify-center"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         setEditingSession(session.id);
@@ -963,7 +963,7 @@ function Sidebar({
                                       }}
                                       title="Manually edit session name"
                                     >
-                                      <Edit2 className="w-3 h-3 text-gray-600 dark:text-gray-400" />
+                                      <Edit2 className="w-3 h-3 text-brand-gray-text dark:text-brand-gray-text" />
                                     </button>
                                     {/* Delete button */}
                                     <button
@@ -1047,18 +1047,18 @@ function Sidebar({
           <div className="hidden md:block">
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 p-3 h-auto font-normal text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-200 border border-blue-200 dark:border-blue-700 rounded-lg mb-2"
+              className="w-full justify-start gap-3 p-3 h-auto font-normal text-left hover:bg-brand-blue/10 dark:hover:bg-brand-blue/20 transition-colors duration-200 border border-brand-blue/30 dark:border-brand-blue/40 rounded-lg mb-2"
               onClick={onShowVersionModal}
             >
               <div className="relative">
-                <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-brand-blue dark:text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                 </svg>
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-brand-blue rounded-full animate-pulse" />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="text-sm font-medium text-blue-700 dark:text-blue-300">Update Available</div>
-                <div className="text-xs text-blue-600 dark:text-blue-400">Version {latestVersion} is ready</div>
+                <div className="text-sm font-medium text-brand-blue dark:text-brand-blue">Update Available</div>
+                <div className="text-xs text-brand-blue dark:text-brand-blue">Version {latestVersion} is ready</div>
               </div>
             </Button>
           </div>
@@ -1066,18 +1066,18 @@ function Sidebar({
           {/* Mobile Version Notification */}
           <div className="md:hidden p-3 pb-2">
             <button
-              className="w-full h-12 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl flex items-center justify-start gap-3 px-4 active:scale-[0.98] transition-all duration-150"
+              className="w-full h-12 bg-brand-blue/10 dark:bg-brand-blue/20 border border-brand-blue/30 dark:border-brand-blue/40 rounded-xl flex items-center justify-start gap-3 px-4 active:scale-[0.98] transition-all duration-150"
               onClick={onShowVersionModal}
             >
               <div className="relative">
                 <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                 </svg>
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-brand-blue rounded-full animate-pulse" />
               </div>
               <div className="min-w-0 flex-1 text-left">
-                <div className="text-sm font-medium text-blue-700 dark:text-blue-300">Update Available</div>
-                <div className="text-xs text-blue-600 dark:text-blue-400">Version {latestVersion} is ready</div>
+                <div className="text-sm font-medium text-brand-blue dark:text-brand-blue">Update Available</div>
+                <div className="text-xs text-brand-blue dark:text-brand-blue">Version {latestVersion} is ready</div>
               </div>
             </button>
           </div>

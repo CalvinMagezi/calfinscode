@@ -83,10 +83,10 @@ const QuickSettingsPanel = ({
           <div className={`flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-6 bg-white dark:bg-gray-900 ${isMobile ? 'pb-20' : ''}`}>
             {/* Appearance Settings */}
             <div className="space-y-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Appearance</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-gray-text dark:text-brand-gray-text mb-2">Appearance</h4>
               
               <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
-                <span className="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
+                <span className="flex items-center gap-2 text-sm text-brand-app-black dark:text-white">
                   {isDarkMode ? <Moon className="h-4 w-4 text-gray-600 dark:text-gray-400" /> : <Sun className="h-4 w-4 text-gray-600 dark:text-gray-400" />}
                   Dark Mode
                 </span>
@@ -96,10 +96,10 @@ const QuickSettingsPanel = ({
 
             {/* Tool Display Settings */}
             <div className="space-y-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Tool Display</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-gray-text dark:text-brand-gray-text mb-2">Tool Display</h4>
               
-              <label className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
-                <span className="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
+              <label className="flex items-center justify-between p-3 rounded-lg bg-brand-primary-bg/5 dark:bg-brand-app-black hover:bg-brand-primary-bg/10 dark:hover:bg-brand-gray-text/20 cursor-pointer transition-colors border border-transparent hover:border-brand-gray-text/30 dark:hover:border-brand-gray-text/40">
+                <span className="flex items-center gap-2 text-sm text-brand-app-black dark:text-white">
                   <Maximize2 className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                   Auto-expand tools
                 </span>
@@ -107,12 +107,12 @@ const QuickSettingsPanel = ({
                   type="checkbox"
                   checked={autoExpandTools}
                   onChange={(e) => onAutoExpandChange(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-800 dark:checked:bg-blue-600"
+                  className="h-4 w-4 rounded border-brand-gray-text/30 dark:border-brand-gray-text/40 text-brand-blue dark:text-brand-blue focus:ring-brand-blue dark:focus:ring-brand-blue dark:bg-brand-app-black dark:checked:bg-brand-blue"
                 />
               </label>
 
-              <label className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
-                <span className="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
+              <label className="flex items-center justify-between p-3 rounded-lg bg-brand-primary-bg/5 dark:bg-brand-app-black hover:bg-brand-primary-bg/10 dark:hover:bg-brand-gray-text/20 cursor-pointer transition-colors border border-transparent hover:border-brand-gray-text/30 dark:hover:border-brand-gray-text/40">
+                <span className="flex items-center gap-2 text-sm text-brand-app-black dark:text-white">
                   <Eye className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                   Show raw parameters
                 </span>
@@ -120,16 +120,16 @@ const QuickSettingsPanel = ({
                   type="checkbox"
                   checked={showRawParameters}
                   onChange={(e) => onShowRawParametersChange(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-800 dark:checked:bg-blue-600"
+                  className="h-4 w-4 rounded border-brand-gray-text/30 dark:border-brand-gray-text/40 text-brand-blue dark:text-brand-blue focus:ring-brand-blue dark:focus:ring-brand-blue dark:bg-brand-app-black dark:checked:bg-brand-blue"
                 />
               </label>
             </div>
             {/* View Options */}
             <div className="space-y-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">View Options</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-gray-text dark:text-brand-gray-text mb-2">View Options</h4>
               
-              <label className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
-                <span className="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
+              <label className="flex items-center justify-between p-3 rounded-lg bg-brand-primary-bg/5 dark:bg-brand-app-black hover:bg-brand-primary-bg/10 dark:hover:bg-brand-gray-text/20 cursor-pointer transition-colors border border-transparent hover:border-brand-gray-text/30 dark:hover:border-brand-gray-text/40">
+                <span className="flex items-center gap-2 text-sm text-brand-app-black dark:text-white">
                   <ArrowDown className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                   Auto-scroll to bottom
                 </span>
@@ -137,17 +137,17 @@ const QuickSettingsPanel = ({
                   type="checkbox"
                   checked={autoScrollToBottom}
                   onChange={(e) => onAutoScrollChange(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-800 dark:checked:bg-blue-600"
+                  className="h-4 w-4 rounded border-brand-gray-text/30 dark:border-brand-gray-text/40 text-brand-blue dark:text-brand-blue focus:ring-brand-blue dark:focus:ring-brand-blue dark:bg-brand-app-black dark:checked:bg-brand-blue"
                 />
               </label>
             </div>
 
             {/* Whisper Dictation Settings - HIDDEN */}
             <div className="space-y-2" style={{ display: 'none' }}>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Whisper Dictation</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-gray-text dark:text-brand-gray-text mb-2">Whisper Dictation</h4>
               
               <div className="space-y-2">
-                <label className="flex items-start p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
+                <label className="flex items-start p-3 rounded-lg bg-brand-primary-bg/5 dark:bg-brand-app-black hover:bg-brand-primary-bg/10 dark:hover:bg-brand-gray-text/20 cursor-pointer transition-colors border border-transparent hover:border-brand-gray-text/30 dark:hover:border-brand-gray-text/40">
                   <input
                     type="radio"
                     name="whisperMode"
@@ -158,20 +158,20 @@ const QuickSettingsPanel = ({
                       localStorage.setItem('whisperMode', 'default');
                       window.dispatchEvent(new Event('whisperModeChanged'));
                     }}
-                    className="mt-0.5 h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-800 dark:checked:bg-blue-600"
+                    className="mt-0.5 h-4 w-4 border-brand-gray-text/30 dark:border-brand-gray-text/40 text-brand-blue dark:text-brand-blue focus:ring-brand-blue dark:focus:ring-brand-blue dark:bg-brand-app-black dark:checked:bg-brand-blue"
                   />
                   <div className="ml-3 flex-1">
-                    <span className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <span className="flex items-center gap-2 text-sm font-medium text-brand-app-black dark:text-white">
                       <Mic className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                       Default Mode
                     </span>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p className="text-xs text-brand-gray-text dark:text-brand-gray-text mt-1">
                       Direct transcription of your speech
                     </p>
                   </div>
                 </label>
 
-                <label className="flex items-start p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
+                <label className="flex items-start p-3 rounded-lg bg-brand-primary-bg/5 dark:bg-brand-app-black hover:bg-brand-primary-bg/10 dark:hover:bg-brand-gray-text/20 cursor-pointer transition-colors border border-transparent hover:border-brand-gray-text/30 dark:hover:border-brand-gray-text/40">
                   <input
                     type="radio"
                     name="whisperMode"
@@ -182,20 +182,20 @@ const QuickSettingsPanel = ({
                       localStorage.setItem('whisperMode', 'prompt');
                       window.dispatchEvent(new Event('whisperModeChanged'));
                     }}
-                    className="mt-0.5 h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-800 dark:checked:bg-blue-600"
+                    className="mt-0.5 h-4 w-4 border-brand-gray-text/30 dark:border-brand-gray-text/40 text-brand-blue dark:text-brand-blue focus:ring-brand-blue dark:focus:ring-brand-blue dark:bg-brand-app-black dark:checked:bg-brand-blue"
                   />
                   <div className="ml-3 flex-1">
-                    <span className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <span className="flex items-center gap-2 text-sm font-medium text-brand-app-black dark:text-white">
                       <Sparkles className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                       Prompt Enhancement
                     </span>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p className="text-xs text-brand-gray-text dark:text-brand-gray-text mt-1">
                       Transform rough ideas into clear, detailed AI prompts
                     </p>
                   </div>
                 </label>
 
-                <label className="flex items-start p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
+                <label className="flex items-start p-3 rounded-lg bg-brand-primary-bg/5 dark:bg-brand-app-black hover:bg-brand-primary-bg/10 dark:hover:bg-brand-gray-text/20 cursor-pointer transition-colors border border-transparent hover:border-brand-gray-text/30 dark:hover:border-brand-gray-text/40">
                   <input
                     type="radio"
                     name="whisperMode"
@@ -206,14 +206,14 @@ const QuickSettingsPanel = ({
                       localStorage.setItem('whisperMode', 'vibe');
                       window.dispatchEvent(new Event('whisperModeChanged'));
                     }}
-                    className="mt-0.5 h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 dark:bg-gray-800 dark:checked:bg-blue-600"
+                    className="mt-0.5 h-4 w-4 border-brand-gray-text/30 dark:border-brand-gray-text/40 text-brand-blue dark:text-brand-blue focus:ring-brand-blue dark:focus:ring-brand-blue dark:bg-brand-app-black dark:checked:bg-brand-blue"
                   />
                   <div className="ml-3 flex-1">
-                    <span className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <span className="flex items-center gap-2 text-sm font-medium text-brand-app-black dark:text-white">
                       <FileText className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                       Vibe Mode
                     </span>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p className="text-xs text-brand-gray-text dark:text-brand-gray-text mt-1">
                       Format ideas as clear agent instructions with details
                     </p>
                   </div>

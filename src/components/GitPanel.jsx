@@ -363,7 +363,7 @@ function GitPanel({ selectedProject, isMobile }) {
           </div>
         </div>
         {isExpanded && diff && (
-          <div className="bg-gray-50 dark:bg-gray-900">
+          <div className="bg-brand-primary-bg/5 dark:bg-brand-app-black">
             <div className="max-h-96 overflow-y-auto p-2">
               <div className="text-xs font-mono text-gray-600 dark:text-gray-400 mb-2">
                 {commit.stats}
@@ -413,7 +413,7 @@ function GitPanel({ selectedProject, isMobile }) {
           </div>
         </div>
         {isExpanded && diff && (
-          <div className="bg-gray-50 dark:bg-gray-900">
+          <div className="bg-brand-primary-bg/5 dark:bg-brand-app-black">
             {isMobile && (
               <div className="flex justify-end p-2 border-b border-gray-200 dark:border-gray-700">
                 <button
@@ -528,8 +528,8 @@ function GitPanel({ selectedProject, isMobile }) {
               onClick={() => setActiveView('changes')}
               className={`flex-1 px-4 py-2 text-sm font-medium transition-colors ${
                 activeView === 'changes'
-                  ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                  ? 'text-brand-blue dark:text-brand-blue border-b-2 border-brand-blue dark:border-brand-blue'
+                  : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-app-black dark:hover:text-white'
               }`}
             >
               <div className="flex items-center justify-center gap-2">
@@ -541,8 +541,8 @@ function GitPanel({ selectedProject, isMobile }) {
               onClick={() => setActiveView('history')}
               className={`flex-1 px-4 py-2 text-sm font-medium transition-colors ${
                 activeView === 'history'
-                  ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                  ? 'text-brand-blue dark:text-brand-blue border-b-2 border-brand-blue dark:border-brand-blue'
+                  : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-app-black dark:hover:text-white'
               }`}
             >
               <div className="flex items-center justify-center gap-2">
@@ -627,14 +627,14 @@ function GitPanel({ selectedProject, isMobile }) {
                     ]);
                     setSelectedFiles(allFiles);
                   }}
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                  className="text-xs text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/90"
                 >
                   Select All
                 </button>
                 <span className="text-gray-300 dark:text-gray-600">|</span>
                 <button
                   onClick={() => setSelectedFiles(new Set())}
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                  className="text-xs text-brand-blue dark:text-brand-blue hover:text-brand-blue/80 dark:hover:text-brand-blue/90"
                 >
                   Deselect All
                 </button>
@@ -694,10 +694,10 @@ function GitPanel({ selectedProject, isMobile }) {
         <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-20' : ''}`}>
           {isLoading ? (
             <div className="flex items-center justify-center h-32">
-              <RefreshCw className="w-6 h-6 animate-spin text-gray-400" />
+              <RefreshCw className="w-6 h-6 animate-spin text-brand-gray-text" />
             </div>
           ) : !gitStatus || (!gitStatus.modified?.length && !gitStatus.added?.length && !gitStatus.deleted?.length && !gitStatus.untracked?.length) ? (
-            <div className="flex flex-col items-center justify-center h-32 text-gray-500 dark:text-gray-400">
+            <div className="flex flex-col items-center justify-center h-32 text-brand-gray-text dark:text-brand-gray-text">
               <GitCommit className="w-12 h-12 mb-2 opacity-50" />
               <p className="text-sm">No changes detected</p>
             </div>
@@ -717,10 +717,10 @@ function GitPanel({ selectedProject, isMobile }) {
         <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-20' : ''}`}>
           {isLoading ? (
             <div className="flex items-center justify-center h-32">
-              <RefreshCw className="w-6 h-6 animate-spin text-gray-400" />
+              <RefreshCw className="w-6 h-6 animate-spin text-brand-gray-text" />
             </div>
           ) : recentCommits.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-32 text-gray-500 dark:text-gray-400">
+            <div className="flex flex-col items-center justify-center h-32 text-brand-gray-text dark:text-brand-gray-text">
               <History className="w-12 h-12 mb-2 opacity-50" />
               <p className="text-sm">No commits found</p>
             </div>

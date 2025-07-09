@@ -48,6 +48,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        brand: {
+          'primary-black': '#0D0F10',
+          'primary-bg': '#131619',
+          'green': '#1DE52F',
+          'blue': '#00C6FA',
+          'black': '#231F20',
+          'gray': '#dfdfdf',
+          'app-black': '#0D0F10',
+          'gray-text': '#828282',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

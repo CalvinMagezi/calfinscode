@@ -174,10 +174,10 @@ function Shell({ selectedProject, selectedSession, isActive }) {
       // Enhanced theme with full 16-color ANSI support + true colors
       theme: {
         // Basic colors
-        background: '#1e1e1e',
+        background: '#111827',
         foreground: '#d4d4d4',
         cursor: '#ffffff',
-        cursorAccent: '#1e1e1e',
+        cursorAccent: '#111827',
         selection: '#264f78',
         selectionForeground: '#ffffff',
         
@@ -435,7 +435,7 @@ function Shell({ selectedProject, selectedSession, isActive }) {
       <div className="flex-shrink-0 bg-gray-800 border-b border-gray-700 px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-brand-green' : 'bg-red-500'}`} />
             {selectedSession && (
               <span className="text-xs text-blue-300">
                 ({selectedSession.summary.slice(0, 30)}...)
@@ -493,11 +493,11 @@ function Shell({ selectedProject, selectedSession, isActive }) {
         
         {/* Connect button when not connected */}
         {isInitialized && !isConnected && !isConnecting && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 p-4">
+          <div className="absolute inset-0 flex items-center justify-center bg-brand-app-black bg-opacity-90 p-4">
             <div className="text-center max-w-sm w-full">
               <button
                 onClick={connectToShell}
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center space-x-2 text-base font-medium w-full sm:w-auto"
+                className="px-6 py-3 bg-brand-green text-brand-app-black rounded-lg hover:bg-brand-green/80 transition-colors flex items-center justify-center space-x-2 text-base font-medium w-full sm:w-auto"
                 title="Connect to shell"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -505,7 +505,7 @@ function Shell({ selectedProject, selectedSession, isActive }) {
                 </svg>
                 <span>Continue in Shell</span>
               </button>
-              <p className="text-gray-400 text-sm mt-3 px-2">
+              <p className="text-brand-gray-text text-sm mt-3 px-2">
                 {selectedSession ? 
                   `Resume session: ${selectedSession.summary.slice(0, 50)}...` : 
                   'Start a new Claude session'
@@ -517,13 +517,13 @@ function Shell({ selectedProject, selectedSession, isActive }) {
         
         {/* Connecting state */}
         {isConnecting && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 p-4">
+          <div className="absolute inset-0 flex items-center justify-center bg-brand-app-black bg-opacity-90 p-4">
             <div className="text-center max-w-sm w-full">
               <div className="flex items-center justify-center space-x-3 text-yellow-400">
                 <div className="w-6 h-6 animate-spin rounded-full border-2 border-yellow-400 border-t-transparent"></div>
                 <span className="text-base font-medium">Connecting to shell...</span>
               </div>
-              <p className="text-gray-400 text-sm mt-3 px-2">
+              <p className="text-brand-gray-text text-sm mt-3 px-2">
                 Starting Claude CLI in {selectedProject.displayName}
               </p>
             </div>

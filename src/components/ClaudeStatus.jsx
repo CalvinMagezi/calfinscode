@@ -53,13 +53,13 @@ function ClaudeStatus({ status, onAbort, isLoading }) {
   
   return (
     <div className="w-full mb-6 animate-in slide-in-from-bottom duration-300">
-      <div className="flex items-center justify-between max-w-4xl mx-auto bg-gray-900 dark:bg-gray-950 text-white rounded-lg shadow-lg px-4 py-3">
+      <div className="flex items-center justify-between max-w-4xl mx-auto bg-brand-app-black dark:bg-brand-app-black text-white rounded-lg shadow-lg px-4 py-3">
         <div className="flex-1">
           <div className="flex items-center gap-3">
             {/* Animated spinner */}
             <span className={cn(
               "text-xl transition-all duration-500",
-              animationPhase % 2 === 0 ? "text-blue-400 scale-110" : "text-blue-300"
+              animationPhase % 2 === 0 ? "text-brand-blue scale-110" : "text-brand-blue/70"
             )}>
               {currentSpinner}
             </span>
@@ -68,19 +68,19 @@ function ClaudeStatus({ status, onAbort, isLoading }) {
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-sm">{statusText}...</span>
-                <span className="text-gray-400 text-sm">({elapsedTime}s)</span>
+                <span className="text-brand-gray-text text-sm">({elapsedTime}s)</span>
                 {tokens > 0 && (
                   <>
-                    <span className="text-gray-400">·</span>
-                    <span className="text-gray-300 text-sm hidden sm:inline">⚒ {tokens.toLocaleString()} tokens</span>
-                    <span className="text-gray-300 text-sm sm:hidden">⚒ {tokens.toLocaleString()}</span>
+                    <span className="text-brand-gray-text">·</span>
+                    <span className="text-brand-gray-text/90 text-sm hidden sm:inline">⚒ {tokens.toLocaleString()} tokens</span>
+                    <span className="text-brand-gray-text/90 text-sm sm:hidden">⚒ {tokens.toLocaleString()}</span>
                   </>
                 )}
-                <span className="text-gray-400 hidden sm:inline">·</span>
-                <span className="text-gray-300 text-sm hidden sm:inline">esc to interrupt</span>
+                <span className="text-brand-gray-text hidden sm:inline">·</span>
+                <span className="text-brand-gray-text/90 text-sm hidden sm:inline">esc to interrupt</span>
               </div>
               {/* Second line for mobile */}
-              <div className="text-xs text-gray-400 sm:hidden mt-1">
+              <div className="text-xs text-brand-gray-text sm:hidden mt-1">
                 esc to interrupt
               </div>
             </div>

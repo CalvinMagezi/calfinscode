@@ -62,10 +62,10 @@ function MainContent({
       <div className="h-full flex flex-col">
         {/* Header with menu button for mobile */}
         {isMobile && (
-          <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-3 sm:p-4 flex-shrink-0">
+          <div className="bg-white dark:bg-brand-app-black border-b border-brand-gray/30 dark:border-brand-gray/20 p-3 sm:p-4 flex-shrink-0">
             <button
               onClick={onMenuClick}
-              className="p-1.5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="p-1.5 text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white rounded-md hover:bg-brand-primary-bg dark:hover:bg-brand-app-black"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -74,10 +74,10 @@ function MainContent({
           </div>
         )}
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-brand-gray-text dark:text-brand-gray-text">
             <div className="w-12 h-12 mx-auto mb-4">
               <div 
-                className="w-full h-full rounded-full border-4 border-gray-200 border-t-blue-500" 
+                className="w-full h-full rounded-full border-4 border-brand-gray/30 border-t-brand-blue" 
                 style={{ 
                   animation: 'spin 1s linear infinite',
                   WebkitAnimation: 'spin 1s linear infinite',
@@ -98,10 +98,10 @@ function MainContent({
       <div className="h-full flex flex-col">
         {/* Header with menu button for mobile */}
         {isMobile && (
-          <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-3 sm:p-4 flex-shrink-0">
+          <div className="bg-white dark:bg-brand-app-black border-b border-brand-gray/30 dark:border-brand-gray/20 p-3 sm:p-4 flex-shrink-0">
             <button
               onClick={onMenuClick}
-              className="p-1.5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="p-1.5 text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white rounded-md hover:bg-brand-primary-bg dark:hover:bg-brand-app-black"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -110,18 +110,18 @@ function MainContent({
           </div>
         )}
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-center text-gray-500 dark:text-gray-400 max-w-md mx-auto px-6">
-            <div className="w-16 h-16 mx-auto mb-6 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="text-center text-brand-gray-text dark:text-brand-gray-text max-w-md mx-auto px-6">
+            <div className="w-16 h-16 mx-auto mb-6 bg-brand-primary-bg dark:bg-brand-app-black rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-brand-gray-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-5l-2-2H5a2 2 0 00-2 2z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">Choose Your Project</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+            <h2 className="text-2xl font-semibold mb-3 text-brand-gray-text dark:text-white">Choose Your Project</h2>
+            <p className="text-brand-gray-text dark:text-brand-gray mb-6 leading-relaxed">
               Select a project from the sidebar to start coding with Claude. Each project contains your chat sessions and file history.
             </p>
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-              <p className="text-sm text-blue-700 dark:text-blue-300">
+            <div className="bg-brand-blue/10 dark:bg-brand-blue/20 rounded-lg p-4 border border-brand-blue/30 dark:border-brand-blue/40">
+              <p className="text-sm text-brand-blue dark:text-brand-blue">
                 💡 <strong>Tip:</strong> {isMobile ? 'Tap the menu button above to access projects' : 'Create a new project by clicking the folder icon in the sidebar'}
               </p>
             </div>
@@ -134,7 +134,7 @@ function MainContent({
   return (
     <div className="h-full flex flex-col">
       {/* Header with tabs */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-3 sm:p-4 flex-shrink-0">
+      <div className="bg-white dark:bg-brand-app-black border-b border-brand-gray/30 dark:border-brand-gray/20 p-3 sm:p-4 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 sm:space-x-3">
             {isMobile && (
@@ -154,28 +154,28 @@ function MainContent({
             <div className="min-w-0">
               {activeTab === 'chat' && selectedSession ? (
                 <div>
-                  <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white truncate">
+                  <h2 className="text-base sm:text-lg font-semibold text-brand-gray-text dark:text-white truncate">
                     {selectedSession.summary}
                   </h2>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                  <div className="text-xs text-brand-gray-text dark:text-brand-gray-text truncate">
                     {selectedProject.displayName} <span className="hidden sm:inline">• {selectedSession.id}</span>
                   </div>
                 </div>
               ) : activeTab === 'chat' && !selectedSession ? (
                 <div>
-                  <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+                  <h2 className="text-base sm:text-lg font-semibold text-brand-gray-text dark:text-white">
                     New Session
                   </h2>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                  <div className="text-xs text-brand-gray-text dark:text-brand-gray-text truncate">
                     {selectedProject.displayName}
                   </div>
                 </div>
               ) : (
                 <div>
-                  <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+                  <h2 className="text-base sm:text-lg font-semibold text-brand-gray-text dark:text-white">
                     {activeTab === 'files' ? 'Project Files' : activeTab === 'git' ? 'Source Control' : 'Project'}
                   </h2>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                  <div className="text-xs text-brand-gray-text dark:text-brand-gray-text truncate">
                     {selectedProject.displayName}
                   </div>
                 </div>
@@ -185,13 +185,13 @@ function MainContent({
           
           {/* Modern Tab Navigation - Right Side */}
           <div className="flex-shrink-0 hidden sm:block">
-            <div className="relative flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+            <div className="relative flex bg-brand-primary-bg dark:bg-brand-app-black rounded-lg p-1">
               <button
                 onClick={() => setActiveTab('chat')}
                 className={`relative px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md ${
                   activeTab === 'chat'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? 'bg-white dark:bg-brand-app-black text-brand-gray-text dark:text-white shadow-sm'
+                    : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white hover:bg-brand-gray/20 dark:hover:bg-brand-app-black'
                 }`}
               >
                 <span className="flex items-center gap-1 sm:gap-1.5">
@@ -205,8 +205,8 @@ function MainContent({
                 onClick={() => setActiveTab('shell')}
                 className={`relative px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 ${
                   activeTab === 'shell'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? 'bg-white dark:bg-brand-app-black text-brand-gray-text dark:text-white shadow-sm'
+                    : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white hover:bg-brand-gray/20 dark:hover:bg-brand-app-black'
                 }`}
               >
                 <span className="flex items-center gap-1 sm:gap-1.5">
@@ -220,8 +220,8 @@ function MainContent({
                 onClick={() => setActiveTab('files')}
                 className={`relative px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 ${
                   activeTab === 'files'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? 'bg-white dark:bg-brand-app-black text-brand-gray-text dark:text-white shadow-sm'
+                    : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white hover:bg-brand-gray/20 dark:hover:bg-brand-app-black'
                 }`}
               >
                 <span className="flex items-center gap-1 sm:gap-1.5">
@@ -235,8 +235,8 @@ function MainContent({
                 onClick={() => setActiveTab('git')}
                 className={`relative px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 ${
                   activeTab === 'git'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? 'bg-white dark:bg-brand-app-black text-brand-gray-text dark:text-white shadow-sm'
+                    : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white hover:bg-brand-gray/20 dark:hover:bg-brand-app-black'
                 }`}
               >
                 <span className="flex items-center gap-1 sm:gap-1.5">
@@ -250,8 +250,8 @@ function MainContent({
                 onClick={() => setActiveTab('preview')}
                 className={`relative px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 ${
                   activeTab === 'preview'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? 'bg-white dark:bg-brand-app-black text-brand-gray-text dark:text-white shadow-sm'
+                    : 'text-brand-gray-text dark:text-brand-gray-text hover:text-brand-gray-text dark:hover:text-white hover:bg-brand-gray/20 dark:hover:bg-brand-app-black'
                 }`}
               > 
                 <span className="flex items-center gap-1 sm:gap-1.5">
