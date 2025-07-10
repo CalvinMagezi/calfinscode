@@ -1701,6 +1701,35 @@ function ChatInterface({
                 </button>
               )}
               
+              {/* Mic button */}
+              <div className="absolute right-16 sm:right-16 top-1/2 transform -translate-y-1/2">
+                <MicButton 
+                  onTranscript={(text: string) => {
+                    if (text.trim()) {
+                      setInput(prevInput => {
+                        const newInput = prevInput.trim() ? `${prevInput} ${text}` : text;
+                        
+                        // Update textarea height after setting new content
+                        setTimeout(() => {
+                          if (textareaRef.current) {
+                            textareaRef.current.style.height = 'auto';
+                            textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+                            
+                            // Check if expanded after transcript
+                            const lineHeight = parseInt(window.getComputedStyle(textareaRef.current).lineHeight);
+                            const isExpanded = textareaRef.current.scrollHeight > lineHeight * 2;
+                            setIsTextareaExpanded(isExpanded);
+                          }
+                        }, 0);
+                        
+                        return newInput;
+                      });
+                    }
+                  }}
+                  className="w-10 h-10 sm:w-10 sm:h-10"
+                />
+              </div>
+              
               {/* Send button */}
               <button
                 type="submit"
