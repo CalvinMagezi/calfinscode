@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="public/logo.svg" alt="Claude Code UI" width="64" height="64">
-  <h1>Claude Code UI</h1>
+  <img src="public/logo2.png" alt="Calfins Code" width="64" height="64">
+  <h1>Calfins Code</h1>
 </div>
 
 
-A desktop and mobile UI for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Anthropic's official CLI for AI-assisted coding. You can use it locally or remotely to view your active projects and sessions in claude code and make changes to them the same way you would do it in claude code CLI. This gives you a proper interface that works everywhere. 
+A desktop and mobile UI for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Anthropic's official CLI for AI-assisted coding. Calfins Code provides a proper interface that works everywhere, allowing you to view your active projects and sessions and make changes to them the same way you would do it in the Claude Code CLI. 
 
 ## Screenshots
 
@@ -233,5 +233,5 @@ This project is open source and free to use, modify, and distribute under the GP
 ---
 
 <div align="center">
-  <strong>Made with care for the Claude Code community</strong>
+  <strong>Made with care for the Claude Code community by Calfins Code</strong>
 </div>

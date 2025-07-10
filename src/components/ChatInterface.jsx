@@ -19,7 +19,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import TodoList from './TodoList';
-import ClaudeLogo from './ClaudeLogo.jsx';
+import CalfinsLogo from './CalfinsLogo.jsx';
 
 import ClaudeStatus from './ClaudeStatus';
 import { MicButton } from './MicButton.jsx';
@@ -92,7 +92,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                 </div>
               ) : (
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm flex-shrink-0 p-1">
-                  <ClaudeLogo className="w-full h-full" />
+                  <CalfinsLogo className="w-full h-full" useIcon={true} />
                 </div>
               )}
               <div className="text-sm font-medium text-brand-gray-text dark:text-white">

@@ -5,7 +5,7 @@ import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { FolderOpen, Folder, Plus, MessageSquare, Clock, ChevronDown, ChevronRight, Edit3, Check, X, Trash2, Settings, FolderPlus, RefreshCw, Sparkles, Edit2 } from 'lucide-react';
 import { cn } from '../lib/utils';
-import ClaudeLogo from './ClaudeLogo';
+import CalfinsLogo from './CalfinsLogo';
 
 // Move formatTimeAgo outside component to avoid recreation on every render
 const formatTimeAgo = (dateString, currentTime) => {
@@ -311,11 +311,11 @@ function Sidebar({
         {/* Desktop Header */}
         <div className="hidden md:flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-sm">
-              <MessageSquare className="w-4 h-4 text-primary-foreground" />
+            <div className="w-8 h-8 flex items-center justify-center">
+              <CalfinsLogo className="w-8 h-8" useIcon={true} />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-foreground">Claude Code UI</h1>
+              <h1 className="text-lg font-bold text-foreground">Calfins Code</h1>
               <p className="text-sm text-muted-foreground">AI coding assistant interface</p>
             </div>
           </div>
@@ -353,11 +353,11 @@ function Sidebar({
         <div className="md:hidden p-3 border-b border-border">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <MessageSquare className="w-4 h-4 text-primary-foreground" />
+              <div className="w-8 h-8 flex items-center justify-center">
+                <CalfinsLogo className="w-8 h-8" useIcon={true} />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-foreground">Claude Code UI</h1>
+                <h1 className="text-lg font-semibold text-foreground">Calfins Code</h1>
                 <p className="text-sm text-muted-foreground">Projects</p>
               </div>
             </div>
@@ -647,8 +647,8 @@ function Sidebar({
                     <Button
                       variant="ghost"
                       className={cn(
-                        "hidden md:flex w-full justify-between p-2 h-auto font-normal hover:bg-accent/50",
-                        isSelected && "bg-accent text-accent-foreground"
+                        "hidden md:flex w-full justify-between p-2 h-auto font-normal hover:bg-brand-blue/10 dark:hover:bg-brand-blue/20",
+                        isSelected && "bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-brand-blue"
                       )}
                       onClick={() => {
                         // Desktop behavior: select project and toggle
@@ -715,7 +715,7 @@ function Sidebar({
                         {editingProject === project.name ? (
                           <>
                             <div
-                              className="w-6 h-6 text-brand-green hover:text-brand-green/80 hover:bg-brand-green/10 dark:hover:bg-brand-green/20 flex items-center justify-center rounded cursor-pointer transition-colors"
+                              className="w-6 h-6 text-brand-blue hover:text-brand-blue/80 hover:bg-brand-blue/10 dark:hover:bg-brand-blue/20 flex items-center justify-center rounded cursor-pointer transition-colors"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 saveProjectName(project.name);
@@ -809,7 +809,7 @@ function Sidebar({
                                 className={cn(
                                   "p-2 mx-3 my-0.5 rounded-md bg-card border active:scale-[0.98] transition-all duration-150 relative",
                                   selectedSession?.id === session.id ? "bg-primary/5 border-primary/20" :
-                                  isActive ? "border-brand-green/30 bg-brand-green/5 dark:bg-brand-green/5" : "border-border/30"
+                                  isActive ? "border-brand-blue/30 bg-brand-blue/5 dark:bg-brand-blue/5" : "border-border/30"
                                 )}
                                 onClick={() => {
                                   onProjectSelect(project);
@@ -866,8 +866,8 @@ function Sidebar({
                               <Button
                                 variant="ghost"
                                 className={cn(
-                                  "w-full justify-start p-2 h-auto font-normal text-left hover:bg-accent/50 transition-colors duration-200",
-                                  selectedSession?.id === session.id && "bg-accent text-accent-foreground"
+                                  "w-full justify-start p-2 h-auto font-normal text-left hover:bg-brand-blue/10 dark:hover:bg-brand-blue/20 transition-colors duration-200",
+                                  selectedSession?.id === session.id && "bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-brand-blue"
                                 )}
                                 onClick={() => onSessionSelect(session)}
                                 onTouchEnd={handleTouchClick(() => onSessionSelect(session))}
@@ -914,7 +914,7 @@ function Sidebar({
                                       autoFocus
                                     />
                                     <button
-                                      className="w-6 h-6 bg-brand-green/10 hover:bg-brand-green/20 dark:bg-brand-green/20 dark:hover:bg-brand-green/40 rounded flex items-center justify-center"
+                                      className="w-6 h-6 bg-brand-blue/10 hover:bg-brand-blue/20 dark:bg-brand-blue/20 dark:hover:bg-brand-blue/40 rounded flex items-center justify-center"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         updateSessionSummary(project.name, session.id, editingSessionName);

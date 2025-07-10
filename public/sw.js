@@ -1,4 +1,4 @@
-// Service Worker for Claude Code UI PWA
+// Service Worker for Calfins Code PWA
 const CACHE_NAME = 'claude-ui-v1';
 const urlsToCache = [
   '/',

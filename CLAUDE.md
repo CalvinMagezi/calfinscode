@@ -19,7 +19,7 @@ npm start            # Build and run production server
 
 ## Architecture Overview
 
-This is a web UI for Claude Code CLI that provides desktop and mobile interfaces for managing Claude sessions and projects.
+This is Calfins Code - a web UI for Claude Code CLI that provides desktop and mobile interfaces for managing Claude sessions and projects.
 
 ### Tech Stack
 - **Frontend**: React 18 + Vite, Tailwind CSS, CodeMirror, React Router

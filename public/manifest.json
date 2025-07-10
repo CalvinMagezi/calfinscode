@@ -1,7 +1,7 @@
 {
-  "name": "Claude Code UI",
+  "name": "Calfins Code",
   "short_name": "Claude UI",
-  "description": "Claude Code UI web application",
+  "description": "Calfins Code web application",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
