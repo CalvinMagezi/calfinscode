@@ -644,40 +644,41 @@ app.post('/api/transcribe', async (req, res) => {
         return res.status(400).json({ error: 'No audio file provided' });
       }
       
-      const apiKey = process.env.OPENAI_API_KEY;
+      const apiKey = process.env.GROQ_API_KEY || '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';
       if (!apiKey) {
-        return res.status(500).json({ error: 'OpenAI API key not configured. Please set OPENAI_API_KEY in server environment.' });
+        return res.status(500).json({ error: 'Groq API key not configured. Please set GROQ_API_KEY in server environment.' });
       }
       
       try {
-        // Create form data for OpenAI
-        const FormData = require('form-data');
-        const formData = new FormData();
-        formData.append('file', req.file.buffer, {
-          filename: req.file.originalname,
-          contentType: req.file.mimetype
-        });
-        formData.append('model', 'whisper-1');
-        formData.append('response_format', 'json');
-        formData.append('language', 'en');
+        // Use Groq SDK for transcription
+        const Groq = require('groq-sdk');
+        const groq = new Groq({ apiKey });
         
-        // Make request to OpenAI
-        const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            ...formData.getHeaders()
-          },
-          body: formData
+        // Create a readable stream from buffer for Groq
+        const fs = require('fs');
+        const path = require('path');
+        const os = require('os');
+        
+        // Write buffer to temporary file
+        const tempFilePath = path.join(os.tmpdir(), `audio_${Date.now()}_${req.file.originalname}`);
+        fs.writeFileSync(tempFilePath, req.file.buffer);
+        
+        // Make request to Groq Whisper
+        const transcription = await groq.audio.transcriptions.create({
+          file: fs.createReadStream(tempFilePath),
+          model: 'whisper-large-v3',
+          response_format: 'json',
+          language: 'en'
         });
         
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error?.message || `Whisper API error: ${response.status}`);
+        // Clean up temp file
+        try {
+          fs.unlinkSync(tempFilePath);
+        } catch (cleanupError) {
+          console.warn('Failed to cleanup temp file:', cleanupError);
         }
         
-        const data = await response.json();
-        let transcribedText = data.text || '';
+        let transcribedText = transcription.text || '';
         
         // Check if enhancement mode is enabled
         const mode = req.body.mode || 'default';
@@ -694,9 +695,7 @@ app.post('/api/transcribe', async (req, res) => {
         
         // Handle different enhancement modes
         try {
-          const OpenAI = require('openai');
-          const openai = new OpenAI({ apiKey });
-          
+          // Use same Groq instance for text enhancement
           let prompt, systemMessage, temperature = 0.7, maxTokens = 800;
           
           switch (mode) {
@@ -744,10 +743,10 @@ Agent instructions:`;
               break;
           }
           
-          // Only make GPT call if we have a prompt
+          // Only make Groq call if we have a prompt
           if (prompt) {
-            const completion = await openai.chat.completions.create({
-              model: 'gpt-4o-mini',
+            const completion = await groq.chat.completions.create({
+              model: 'llama3-8b-8192',
               messages: [
                 { role: 'system', content: systemMessage },
                 { role: 'user', content: prompt }
@@ -759,9 +758,9 @@ Agent instructions:`;
             transcribedText = completion.choices[0].message.content || transcribedText;
           }
           
-        } catch (gptError) {
-          console.error('GPT processing error:', gptError);
-          // Fall back to original transcription if GPT fails
+        } catch (groqError) {
+          console.error('Groq processing error:', groqError);
+          // Fall back to original transcription if Groq fails
         }
         
         res.json({ text: transcribedText });
