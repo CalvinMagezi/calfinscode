@@ -1,14 +1,23 @@
 import { useState, useRef, useCallback } from 'react';
 
-export function useAudioRecorder() {
-  const [isRecording, setRecording] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [error, setError] = useState(null);
-  const mediaRecorderRef = useRef(null);
-  const streamRef = useRef(null);
-  const chunksRef = useRef([]);
+export interface UseAudioRecorderReturn {
+  isRecording: boolean;
+  audioBlob: Blob | null;
+  error: string | null;
+  start: () => Promise<void>;
+  stop: () => void;
+  reset: () => void;
+}
 
-  const start = useCallback(async () => {
+export function useAudioRecorder(): UseAudioRecorderReturn {
+  const [isRecording, setRecording] = useState(false);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+
+  const start = useCallback(async (): Promise<void> => {
     try {
       setError(null);
       setAudioBlob(null);
@@ -35,7 +44,7 @@ export function useAudioRecorder() {
       mediaRecorderRef.current = recorder;
 
       // Set up event handlers
-      recorder.ondataavailable = (e) => {
+      recorder.ondataavailable = (e: BlobEvent) => {
         if (e.data.size > 0) {
           chunksRef.current.push(e.data);
         }
@@ -53,7 +62,7 @@ export function useAudioRecorder() {
         }
       };
 
-      recorder.onerror = (event) => {
+      recorder.onerror = (event: Event) => {
         console.error('MediaRecorder error:', event);
         setError('Recording failed');
         setRecording(false);
@@ -65,12 +74,13 @@ export function useAudioRecorder() {
       console.log('Recording started');
     } catch (err) {
       console.error('Failed to start recording:', err);
-      setError(err.message || 'Failed to start recording');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to start recording';
+      setError(errorMessage);
       setRecording(false);
     }
   }, []);
 
-  const stop = useCallback(() => {
+  const stop = useCallback((): void => {
     console.log('Stop called, recorder state:', mediaRecorderRef.current?.state);
     
     try {
@@ -92,7 +102,7 @@ export function useAudioRecorder() {
     }
   }, []);
 
-  const reset = useCallback(() => {
+  const reset = useCallback((): void => {
     setAudioBlob(null);
     setError(null);
     chunksRef.current = [];

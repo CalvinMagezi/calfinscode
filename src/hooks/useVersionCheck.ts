@@ -1,16 +1,29 @@
-// hooks/useVersionCheck.js
 import { useState, useEffect } from 'react';
 import { version } from '../../package.json';
 
-export const useVersionCheck = (owner, repo) => {
+export interface GitHubRelease {
+  tag_name: string;
+  name: string;
+  body: string;
+  html_url: string;
+  published_at: string;
+}
+
+export interface UseVersionCheckReturn {
+  updateAvailable: boolean;
+  latestVersion: string | null;
+  currentVersion: string;
+}
+
+export const useVersionCheck = (owner: string, repo: string): UseVersionCheckReturn => {
   const [updateAvailable, setUpdateAvailable] = useState(false);
-  const [latestVersion, setLatestVersion] = useState(null);
+  const [latestVersion, setLatestVersion] = useState<string | null>(null);
 
   useEffect(() => {
-    const checkVersion = async () => {
+    const checkVersion = async (): Promise<void> => {
       try {
         const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
-        const data = await response.json();
+        const data: GitHubRelease = await response.json();
         
         // Handle the case where there might not be any releases
         if (data.tag_name) {
@@ -36,4 +49,4 @@ export const useVersionCheck = (owner, repo) => {
   }, [owner, repo]);
 
   return { updateAvailable, latestVersion, currentVersion: version };
-}; 
+};

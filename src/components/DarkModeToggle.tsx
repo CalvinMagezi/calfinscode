@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
-function DarkModeToggle() {
+const DarkModeToggle: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
@@ -30,6 +30,6 @@ function DarkModeToggle() {
       </span>
     </button>
   );
-}
+};
 
 export default DarkModeToggle;

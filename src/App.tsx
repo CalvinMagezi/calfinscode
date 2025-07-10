@@ -1,5 +1,5 @@
 /*
- * App.jsx - Main Application Component with Session Protection System
+ * App.tsx - Main Application Component with Session Protection System
  * 
  * SESSION PROTECTION SYSTEM OVERVIEW:
  * ===================================
@@ -18,46 +18,59 @@
  * Handles both existing sessions (with real IDs) and new sessions (with temporary IDs).
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, JSX } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import MainContent from './components/MainContent';
-import MobileNav from './components/MobileNav';
-import ToolsSettings from './components/ToolsSettings';
-import QuickSettingsPanel from './components/QuickSettingsPanel';
+import Sidebar from './components/Sidebar.jsx';
+import MainContent from './components/MainContent.jsx';
+import MobileNav from './components/MobileNav.jsx';
+import ToolsSettings from './components/ToolsSettings.jsx';
+import QuickSettingsPanel from './components/QuickSettingsPanel.jsx';
 
 import { useWebSocket } from './utils/websocket';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useVersionCheck } from './hooks/useVersionCheck';
+import { Project, Session } from './types/project';
+import { WebSocketMessageUnion } from './types/websocket';
 
+// Types for component props and state
+interface AppContentProps {}
+
+interface VersionUpgradeModalProps {
+  showVersionModal: boolean;
+  onClose: () => void;
+  currentVersion: string;
+  latestVersion: string;
+}
+
+type ActiveTab = 'chat' | 'files' | 'git' | 'preview';
 
 // Main App component with routing
-function AppContent() {
+function AppContent(): JSX.Element {
   const navigate = useNavigate();
-  const { sessionId } = useParams();
+  const { sessionId } = useParams<{ sessionId: string }>();
   
   const { updateAvailable, latestVersion, currentVersion } = useVersionCheck('siteboon', 'claudecodeui');
-  const [showVersionModal, setShowVersionModal] = useState(false);
+  const [showVersionModal, setShowVersionModal] = useState<boolean>(false);
   
-  const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [selectedSession, setSelectedSession] = useState(null);
-  const [activeTab, setActiveTab] = useState('chat'); // 'chat' or 'files'
-  const [isMobile, setIsMobile] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isLoadingProjects, setIsLoadingProjects] = useState(true);
-  const [isInputFocused, setIsInputFocused] = useState(false);
-  const [showToolsSettings, setShowToolsSettings] = useState(false);
-  const [showQuickSettings, setShowQuickSettings] = useState(false);
-  const [autoExpandTools, setAutoExpandTools] = useState(() => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedSession, setSelectedSession] = useState<Session | null>(null);
+  const [activeTab, setActiveTab] = useState<ActiveTab>('chat');
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [isLoadingProjects, setIsLoadingProjects] = useState<boolean>(true);
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
+  const [showToolsSettings, setShowToolsSettings] = useState<boolean>(false);
+  const [showQuickSettings, setShowQuickSettings] = useState<boolean>(false);
+  const [autoExpandTools, setAutoExpandTools] = useState<boolean>(() => {
     const saved = localStorage.getItem('autoExpandTools');
     return saved !== null ? JSON.parse(saved) : false;
   });
-  const [showRawParameters, setShowRawParameters] = useState(() => {
+  const [showRawParameters, setShowRawParameters] = useState<boolean>(() => {
     const saved = localStorage.getItem('showRawParameters');
     return saved !== null ? JSON.parse(saved) : false;
   });
-  const [autoScrollToBottom, setAutoScrollToBottom] = useState(() => {
+  const [autoScrollToBottom, setAutoScrollToBottom] = useState<boolean>(() => {
     const saved = localStorage.getItem('autoScrollToBottom');
     return saved !== null ? JSON.parse(saved) : true;
   });
@@ -65,12 +78,12 @@ function AppContent() {
   // automatic project updates from interrupting ongoing chats. When a user sends
   // a message, the session is marked as "active" and project updates are paused
   // until the conversation completes or is aborted.
-  const [activeSessions, setActiveSessions] = useState(new Set()); // Track sessions with active conversations
-  
+  const [activeSessions, setActiveSessions] = useState<Set<string>>(new Set());
+
   const { ws, sendMessage, messages } = useWebSocket();
 
   useEffect(() => {
-    const checkMobile = () => {
+    const checkMobile = (): void => {
       setIsMobile(window.innerWidth < 768);
     };
     
@@ -87,7 +100,12 @@ function AppContent() {
 
   // Helper function to determine if an update is purely additive (new sessions/projects)
   // vs modifying existing selected items that would interfere with active conversations
-  const isUpdateAdditive = (currentProjects, updatedProjects, selectedProject, selectedSession) => {
+  const isUpdateAdditive = (
+    currentProjects: Project[], 
+    updatedProjects: Project[], 
+    selectedProject: Project | null, 
+    selectedSession: Session | null
+  ): boolean => {
     if (!selectedProject || !selectedSession) {
       // No active session to protect, allow all updates
       return true;
@@ -141,7 +159,7 @@ function AppContent() {
         
         if (hasActiveSession) {
           // Allow updates but be selective: permit additions, prevent changes to existing items
-          const updatedProjects = latestMessage.projects;
+          const updatedProjects = (latestMessage as any).projects as Project[];
           const currentProjects = projects;
           
           // Check if this is purely additive (new sessions/projects) vs modification of existing ones
@@ -155,7 +173,7 @@ function AppContent() {
         }
         
         // Update projects state with the new data from WebSocket
-        const updatedProjects = latestMessage.projects;
+        const updatedProjects = (latestMessage as any).projects as Project[];
         setProjects(updatedProjects);
         
         // Update selected project if it exists in the updated projects
@@ -177,13 +195,13 @@ function AppContent() {
         }
       }
     }
-  }, [messages, selectedProject, selectedSession, activeSessions]);
+  }, [messages, selectedProject, selectedSession, activeSessions, projects]);
 
-  const fetchProjects = async () => {
+  const fetchProjects = async (): Promise<void> => {
     try {
       setIsLoadingProjects(true);
       const response = await fetch('/api/projects');
-      const data = await response.json();
+      const data: Project[] = await response.json();
       
       // Optimize to preserve object references when data hasn't changed
       setProjects(prevProjects => {
@@ -220,7 +238,7 @@ function AppContent() {
   };
 
   // Expose fetchProjects globally for component access
-  window.refreshProjects = fetchProjects;
+  (window as any).refreshProjects = fetchProjects;
 
   // Handle URL-based session loading
   useEffect(() => {
@@ -245,9 +263,9 @@ function AppContent() {
       // Just navigate to it and it will be found when the sidebar refreshes
       // Don't redirect to home, let the session load naturally
     }
-  }, [sessionId, projects, navigate]);
+  }, [sessionId, projects, selectedSession, navigate]);
 
-  const handleProjectSelect = (project) => {
+  const handleProjectSelect = (project: Project): void => {
     setSelectedProject(project);
     setSelectedSession(null);
     navigate('/');
@@ -256,7 +274,7 @@ function AppContent() {
     }
   };
 
-  const handleSessionSelect = (session) => {
+  const handleSessionSelect = (session: Session): void => {
     setSelectedSession(session);
     // Only switch to chat tab when user explicitly selects a session
     // This prevents tab switching during automatic updates
@@ -269,7 +287,7 @@ function AppContent() {
     navigate(`/session/${session.id}`);
   };
 
-  const handleNewSession = (project) => {
+  const handleNewSession = (project: Project): void => {
     setSelectedProject(project);
     setSelectedSession(null);
     setActiveTab('chat');
@@ -279,7 +297,7 @@ function AppContent() {
     }
   };
 
-  const handleSessionDelete = (sessionId) => {
+  const handleSessionDelete = (sessionId: string): void => {
     // If the deleted session was currently selected, clear it
     if (selectedSession?.id === sessionId) {
       setSelectedSession(null);
@@ -299,13 +317,11 @@ function AppContent() {
     );
   };
 
-
-
-  const handleSidebarRefresh = async () => {
+  const handleSidebarRefresh = async (): Promise<void> => {
     // Refresh only the sessions for all projects, don't change selected state
     try {
       const response = await fetch('/api/projects');
-      const freshProjects = await response.json();
+      const freshProjects: Project[] = await response.json();
       
       // Optimize to preserve object references and minimize re-renders
       setProjects(prevProjects => {
@@ -349,7 +365,7 @@ function AppContent() {
     }
   };
 
-  const handleProjectDelete = (projectName) => {
+  const handleProjectDelete = (projectName: string): void => {
     // If the deleted project was currently selected, clear it
     if (selectedProject?.name === projectName) {
       setSelectedProject(null);
@@ -367,14 +383,14 @@ function AppContent() {
   
   // markSessionAsActive: Called when user sends a message to mark session as protected
   // This includes both real session IDs and temporary "new-session-*" identifiers
-  const markSessionAsActive = (sessionId) => {
+  const markSessionAsActive = (sessionId: string): void => {
     if (sessionId) {
       setActiveSessions(prev => new Set([...prev, sessionId]));
     }
   };
 
   // markSessionAsInactive: Called when conversation completes/aborts to re-enable project updates
-  const markSessionAsInactive = (sessionId) => {
+  const markSessionAsInactive = (sessionId: string): void => {
     if (sessionId) {
       setActiveSessions(prev => {
         const newSet = new Set(prev);
@@ -387,10 +403,10 @@ function AppContent() {
   // replaceTemporarySession: Called when WebSocket provides real session ID for new sessions
   // Removes temporary "new-session-*" identifiers and adds the real session ID
   // This maintains protection continuity during the transition from temporary to real session
-  const replaceTemporarySession = (realSessionId) => {
+  const replaceTemporarySession = (realSessionId: string): void => {
     if (realSessionId) {
       setActiveSessions(prev => {
-        const newSet = new Set();
+        const newSet = new Set<string>();
         // Keep all non-temporary sessions and add the real session ID
         for (const sessionId of prev) {
           if (!sessionId.startsWith('new-session-')) {
@@ -404,7 +420,7 @@ function AppContent() {
   };
 
   // Version Upgrade Modal Component
-  const VersionUpgradeModal = () => {
+  const VersionUpgradeModal: React.FC = () => {
     if (!showVersionModal) return null;
 
     return (
@@ -578,10 +594,11 @@ function AppContent() {
           onSessionActive={markSessionAsActive}
           onSessionInactive={markSessionAsInactive}
           onReplaceTemporarySession={replaceTemporarySession}
-          onNavigateToSession={(sessionId) => navigate(`/session/${sessionId}`)}
+          onNavigateToSession={(sessionId: string) => navigate(`/session/${sessionId}`)}
           onShowSettings={() => setShowToolsSettings(true)}
           autoExpandTools={autoExpandTools}
           showRawParameters={showRawParameters}
+          autoScrollToBottom={autoScrollToBottom}
         />
       </div>
 
@@ -599,17 +616,17 @@ function AppContent() {
           isOpen={showQuickSettings}
           onToggle={setShowQuickSettings}
           autoExpandTools={autoExpandTools}
-          onAutoExpandChange={(value) => {
+          onAutoExpandChange={(value: boolean) => {
             setAutoExpandTools(value);
             localStorage.setItem('autoExpandTools', JSON.stringify(value));
           }}
           showRawParameters={showRawParameters}
-          onShowRawParametersChange={(value) => {
+          onShowRawParametersChange={(value: boolean) => {
             setShowRawParameters(value);
             localStorage.setItem('showRawParameters', JSON.stringify(value));
           }}
           autoScrollToBottom={autoScrollToBottom}
-          onAutoScrollChange={(value) => {
+          onAutoScrollChange={(value: boolean) => {
             setAutoScrollToBottom(value);
             localStorage.setItem('autoScrollToBottom', JSON.stringify(value));
           }}
@@ -630,7 +647,7 @@ function AppContent() {
 }
 
 // Root App component with router
-function App() {
+function App(): JSX.Element {
   return (
     <ThemeProvider>
       <Router>
