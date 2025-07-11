@@ -1236,7 +1236,7 @@ function ChatInterface({
           }
           break;
           
-        case 'claude-response':
+        case 'claude-response': {
           const messageData = (latestMessage as any).data?.message || (latestMessage as any).data;
           
           // Handle Claude CLI session duplication bug workaround
@@ -1339,8 +1339,9 @@ function ChatInterface({
             }
           }
           break;
+        }
           
-        case 'claude-complete':
+        case 'claude-complete': {
           setIsLoading(false);
           setCanAbortSession(false);
           setClaudeStatus(null);
@@ -1356,8 +1357,9 @@ function ChatInterface({
             sessionStorage.removeItem('pendingSessionId');
           }
           break;
+        }
           
-        case 'session-aborted':
+        case 'session-aborted': {
           setIsLoading(false);
           setCanAbortSession(false);
           setClaudeStatus(null);
@@ -1372,12 +1374,13 @@ function ChatInterface({
             timestamp: new Date()
           }]);
           break;
+        }
 
-        case 'claude-status':
+        case 'claude-status': {
           console.log('🔔 Received claude-status message:', latestMessage);
           const statusData = (latestMessage as any).data;
           if (statusData) {
-            let statusInfo = {
+            const statusInfo = {
               text: 'Working...',
               tokens: 0,
               can_interrupt: true
@@ -1407,6 +1410,7 @@ function ChatInterface({
             setCanAbortSession(statusInfo.can_interrupt);
           }
           break;
+        }
       }
     }
   }, [messages, selectedProject, selectedSession, currentSessionId, onSessionInactive, onReplaceTemporarySession, onNavigateToSession]);
@@ -1642,10 +1646,12 @@ function ChatInterface({
                   if (e.key === 'Enter') {
                     if ((e.ctrlKey || e.metaKey) && !e.shiftKey) {
                       e.preventDefault();
-                      // Submit form
+                      // Submit form by triggering the form submit event
+                      e.currentTarget.form?.requestSubmit();
                     } else if (!e.shiftKey && !e.ctrlKey && !e.metaKey) {
                       e.preventDefault();
-                      // Submit form
+                      // Submit form by triggering the form submit event
+                      e.currentTarget.form?.requestSubmit();
                     }
                   }
                 }}

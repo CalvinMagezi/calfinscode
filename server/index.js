@@ -30,9 +30,10 @@ const os = require('os');
 const pty = require('node-pty');
 const fetch = require('node-fetch');
 
-const { getProjects, getSessions, getSessionMessages, renameProject, deleteSession, deleteProject, addProjectManually, extractProjectDirectory, clearProjectDirectoryCache } = require('./projects');
+const { getProjects, getSessions, getSessionMessages, renameProject, deleteSession, updateSessionSummary, deleteProject, addProjectManually, extractProjectDirectory, clearProjectDirectoryCache } = require('./projects');
 const { spawnClaude, abortClaudeSession } = require('./claude-cli');
 const gitRoutes = require('./routes/git');
+const mcpRoutes = require('./routes/mcp');
 
 // File system watcher for projects folder
 let projectsWatcher = null;
@@ -153,6 +154,9 @@ app.use(express.static(path.join(__dirname, '../dist')));
 // Git API Routes
 app.use('/api/git', gitRoutes);
 
+// MCP API Routes
+app.use('/api/mcp', mcpRoutes);
+
 // API Routes
 app.get('/api/config', (req, res) => {
   // Always use the server's actual IP and port for WebSocket connections
@@ -215,6 +219,23 @@ app.delete('/api/projects/:projectName/sessions/:sessionId', async (req, res) =>
     const { projectName, sessionId } = req.params;
     await deleteSession(projectName, sessionId);
     res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update session summary endpoint
+app.patch('/api/projects/:projectName/sessions/:sessionId', async (req, res) => {
+  try {
+    const { projectName, sessionId } = req.params;
+    const { summary } = req.body;
+    
+    if (!summary || typeof summary !== 'string') {
+      return res.status(400).json({ error: 'Summary is required and must be a string' });
+    }
+    
+    await updateSessionSummary(projectName, sessionId, summary);
+    res.json({ success: true, message: 'Session summary updated successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -509,6 +509,58 @@ async function deleteSession(projectName, sessionId) {
   }
 }
 
+// Update session summary
+async function updateSessionSummary(projectName, sessionId, summary) {
+  const projectDir = path.join(process.env.HOME, '.claude', 'projects', projectName);
+  
+  try {
+    const files = await fs.readdir(projectDir);
+    const jsonlFiles = files.filter(file => file.endsWith('.jsonl'));
+    
+    if (jsonlFiles.length === 0) {
+      throw new Error('No session files found for this project');
+    }
+    
+    // Check all JSONL files to find which one contains the session
+    for (const file of jsonlFiles) {
+      const jsonlFile = path.join(projectDir, file);
+      const content = await fs.readFile(jsonlFile, 'utf8');
+      const lines = content.split('\n').filter(line => line.trim());
+      
+      // Check if this file contains the session
+      const hasSession = lines.some(line => {
+        try {
+          const data = JSON.parse(line);
+          return data.sessionId === sessionId;
+        } catch {
+          return false;
+        }
+      });
+      
+      if (hasSession) {
+        // Create a summary entry
+        const summaryEntry = {
+          type: 'summary',
+          summary: summary,
+          sessionId: sessionId,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Append the summary entry to the file
+        const summaryLine = JSON.stringify(summaryEntry);
+        const updatedContent = content.trim() + (content.trim() ? '\n' : '') + summaryLine + '\n';
+        await fs.writeFile(jsonlFile, updatedContent);
+        return true;
+      }
+    }
+    
+    throw new Error(`Session ${sessionId} not found in any files`);
+  } catch (error) {
+    console.error(`Error updating session summary for ${sessionId} in project ${projectName}:`, error);
+    throw error;
+  }
+}
+
 // Check if a project is empty (has no sessions)
 async function isProjectEmpty(projectName) {
   try {
@@ -608,6 +660,7 @@ module.exports = {
   parseJsonlSessions,
   renameProject,
   deleteSession,
+  updateSessionSummary,
   isProjectEmpty,
   deleteProject,
   addProjectManually,

@@ -12,8 +12,14 @@ import {
   ToolsSettings 
 } from './claude';
 
+import {
+  MCPServer,
+  MCPServerStatus,
+  MCPHealth
+} from './mcp';
+
 export interface WebSocketMessage {
-  type: 'claude-command' | 'abort-session' | 'projects_updated' | 'claude-response' | 'claude-complete' | 'session-created' | 'session-aborted' | 'file-tree-updated' | 'terminal-output' | 'terminal-input' | 'claude-status';
+  type: 'claude-command' | 'abort-session' | 'projects_updated' | 'claude-response' | 'claude-complete' | 'session-created' | 'session-aborted' | 'file-tree-updated' | 'terminal-output' | 'terminal-input' | 'claude-status' | 'mcp-server-status' | 'mcp-server-added' | 'mcp-server-removed' | 'mcp-server-error' | 'mcp-servers-updated' | 'mcp-health-updated';
   timestamp?: string;
 }
 
@@ -76,6 +82,38 @@ export interface ClaudeStatusMessage extends WebSocketMessage {
   data: any;
 }
 
+// MCP WebSocket Messages
+export interface MCPServerStatusMessage extends WebSocketMessage {
+  type: 'mcp-server-status';
+  server: MCPServerStatus;
+}
+
+export interface MCPServerAddedMessage extends WebSocketMessage {
+  type: 'mcp-server-added';
+  server: MCPServer;
+}
+
+export interface MCPServerRemovedMessage extends WebSocketMessage {
+  type: 'mcp-server-removed';
+  serverName: string;
+}
+
+export interface MCPServerErrorMessage extends WebSocketMessage {
+  type: 'mcp-server-error';
+  serverName: string;
+  error: string;
+}
+
+export interface MCPServersUpdatedMessage extends WebSocketMessage {
+  type: 'mcp-servers-updated';
+  servers: MCPServer[];
+}
+
+export interface MCPHealthUpdatedMessage extends WebSocketMessage {
+  type: 'mcp-health-updated';
+  health: MCPHealth;
+}
+
 export type WebSocketMessageUnion = 
   | ClaudeCommandMessage
   | ClaudeResponseMessage
@@ -87,4 +125,10 @@ export type WebSocketMessageUnion =
   | TerminalOutputMessage
   | TerminalInputMessage
   | AbortSessionMessage
-  | ClaudeStatusMessage;
+  | ClaudeStatusMessage
+  | MCPServerStatusMessage
+  | MCPServerAddedMessage
+  | MCPServerRemovedMessage
+  | MCPServerErrorMessage
+  | MCPServersUpdatedMessage
+  | MCPHealthUpdatedMessage;

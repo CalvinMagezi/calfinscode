@@ -3,11 +3,13 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
 import { Badge } from './ui/badge';
-import { X, Plus, Settings, Shield, AlertTriangle, Moon, Sun } from 'lucide-react';
+import { X, Plus, Settings, Shield, AlertTriangle, Moon, Sun, Server, Wrench } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import McpPanel from './McpPanel';
 
 function ToolsSettings({ isOpen, onClose }) {
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const [activeTab, setActiveTab] = useState('tools');
   const [allowedTools, setAllowedTools] = useState([]);
   const [disallowedTools, setDisallowedTools] = useState([]);
   const [newAllowedTool, setNewAllowedTool] = useState('');
@@ -15,6 +17,12 @@ function ToolsSettings({ isOpen, onClose }) {
   const [skipPermissions, setSkipPermissions] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState(null);
+
+  const tabs = [
+    { id: 'tools', label: 'Tools', icon: Wrench },
+    { id: 'mcp', label: 'MCP Servers', icon: Server },
+    { id: 'appearance', label: 'Appearance', icon: Settings }
+  ];
 
   // Common tool patterns
   const commonTools = [
@@ -139,50 +147,35 @@ function ToolsSettings({ isOpen, onClose }) {
           </Button>
         </div>
 
+        {/* Tab Navigation */}
+        <div className="border-b border-border px-4 md:px-6">
+          <div className="flex space-x-8">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center space-x-2 py-4 border-b-2 font-medium text-sm transition-colors ${
+                    activeTab === tab.id
+                      ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="flex-1 overflow-y-auto">
-          <div className="p-4 md:p-6 space-y-6 md:space-y-8 pb-safe-area-inset-bottom">
+          <div className="p-4 md:p-6 pb-safe-area-inset-bottom">
             
-            {/* Theme Settings */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                {isDarkMode ? <Moon className="w-5 h-5 text-blue-500" /> : <Sun className="w-5 h-5 text-yellow-500" />}
-                <h3 className="text-lg font-medium text-foreground">
-                  Appearance
-                </h3>
-              </div>
-              <div className="bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="font-medium text-foreground">
-                      Dark Mode
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Toggle between light and dark themes
-                    </div>
-                  </div>
-                  <button
-                    onClick={toggleDarkMode}
-                    className="relative inline-flex h-8 w-14 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-                    role="switch"
-                    aria-checked={isDarkMode}
-                    aria-label="Toggle dark mode"
-                  >
-                    <span className="sr-only">Toggle dark mode</span>
-                    <span
-                      className={`${
-                        isDarkMode ? 'translate-x-7' : 'translate-x-1'
-                      } inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-200 flex items-center justify-center`}
-                    >
-                      {isDarkMode ? (
-                        <Moon className="w-3.5 h-3.5 text-gray-700" />
-                      ) : (
-                        <Sun className="w-3.5 h-3.5 text-yellow-500" />
-                      )}
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            {/* Tools Tab */}
+            {activeTab === 'tools' && (
+              <div className="space-y-6 md:space-y-8">
             
             {/* Skip Permissions */}
             <div className="space-y-4">
@@ -366,10 +359,67 @@ function ToolsSettings({ isOpen, onClose }) {
                 <li><code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">"Bash(rm:*)"</code> - Block all rm commands (dangerous)</li>
               </ul>
             </div>
+              </div>
+            )}
+
+            {/* MCP Tab */}
+            {activeTab === 'mcp' && (
+              <div className="space-y-6">
+                <McpPanel />
+              </div>
+            )}
+
+            {/* Appearance Tab */}
+            {activeTab === 'appearance' && (
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    {isDarkMode ? <Moon className="w-5 h-5 text-blue-500" /> : <Sun className="w-5 h-5 text-yellow-500" />}
+                    <h3 className="text-lg font-medium text-foreground">
+                      Theme Settings
+                    </h3>
+                  </div>
+                  <div className="bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-foreground">
+                          Dark Mode
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Toggle between light and dark themes
+                        </div>
+                      </div>
+                      <button
+                        onClick={toggleDarkMode}
+                        className="relative inline-flex h-8 w-14 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                        role="switch"
+                        aria-checked={isDarkMode}
+                        aria-label="Toggle dark mode"
+                      >
+                        <span className="sr-only">Toggle dark mode</span>
+                        <span
+                          className={`${
+                            isDarkMode ? 'translate-x-7' : 'translate-x-1'
+                          } inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-200 flex items-center justify-center`}
+                        >
+                          {isDarkMode ? (
+                            <Moon className="w-3.5 h-3.5 text-gray-700" />
+                          ) : (
+                            <Sun className="w-3.5 h-3.5 text-yellow-500" />
+                          )}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 md:p-6 border-t border-border flex-shrink-0 gap-3 pb-safe-area-inset-bottom">
+        {/* Save button only for tools tab */}
+        {activeTab === 'tools' && (
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 md:p-6 border-t border-border flex-shrink-0 gap-3 pb-safe-area-inset-bottom">
           <div className="flex items-center justify-center sm:justify-start gap-2 order-2 sm:order-1">
             {saveStatus === 'success' && (
               <div className="text-green-600 dark:text-green-400 text-sm flex items-center gap-1">
@@ -412,7 +462,8 @@ function ToolsSettings({ isOpen, onClose }) {
               )}
             </Button>
           </div>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
